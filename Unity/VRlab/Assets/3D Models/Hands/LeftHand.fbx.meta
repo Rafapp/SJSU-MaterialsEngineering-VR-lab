@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: ff445c6c6e2e89546a7b936a3917dc5a
+guid: 8d40ef9211498a742b4363e56dce0693
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: 5712509923591452515
-    second: r_hand_skeletal_lowres
+      74: 1827226128182048838
+    second: Take 001
   externalObjects: {}
   materials:
     materialImportMode: 2
