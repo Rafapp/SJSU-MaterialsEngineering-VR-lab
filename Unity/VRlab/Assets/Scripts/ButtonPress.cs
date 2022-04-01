@@ -5,6 +5,8 @@ using UnityEngine;
 public class ButtonPress : MonoBehaviour
 {
     private Animator anim;
+    public int buttonID;
+    public bool isPressed;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -13,7 +15,6 @@ public class ButtonPress : MonoBehaviour
     {
         if (other.gameObject.tag == "Hand")
         {
-            print("Button collide hand");
             anim.SetTrigger("ButtonPress");
         }
     }
