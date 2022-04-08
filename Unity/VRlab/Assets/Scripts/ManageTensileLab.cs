@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class TensileLabManager : MonoBehaviour
+public class ManageTensileLab : MonoBehaviour
 {
     // Variables and instances
-    public static TensileLabManager Instance;
-    private enum SpecimenType { 
+    public enum SpecimenType
+    {
         Metal, Ceramic, Polymer, Null
     }
 
-    private SpecimenType currentSpecimen;
+    public static ManageTensileLab Instance;
+
+    public int currentQuestion;
+
+    public SpecimenType currentSpecimen;
+
+    SpecimenType lastSpecimen = SpecimenType.Null;
 
     // GameObjects
     [SerializeField]
-    GameObject graphObject1, graphObject2, specimenSocket;
+    GameObject specimenSocket;
 
     // GameObject components
-    [SerializeField]
-    private Sprite[] GraphSprites;
+    
 
     private XRSocketInteractor specimenSocketInteractor;
 
@@ -31,8 +36,8 @@ public class TensileLabManager : MonoBehaviour
 
         specimenSocketInteractor = specimenSocket.GetComponent<XRSocketInteractor>();
 
-        // Functions to be called after lever pulled event
-        PullLever.pulledLeverEvent += LeverPulledFunction;
+        // Update current question if correct specimen is tested
+        PullLever.pulledLeverEvent += UpdateQuestion;
     }
     void Start()
     {
@@ -46,9 +51,15 @@ public class TensileLabManager : MonoBehaviour
     #endregion
 
     #region Lab Functions
-    private void LeverPulledFunction()
+    private void UpdateQuestion()
     {
-        
+        print("updating question");
+        currentSpecimen = checkSpecimen();
+        if (currentSpecimen != lastSpecimen)
+        {
+            currentQuestion++;
+            lastSpecimen = currentSpecimen;
+        }
     }
 
     private SpecimenType checkSpecimen() {
