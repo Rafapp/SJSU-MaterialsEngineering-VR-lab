@@ -24,8 +24,6 @@ public class ManageTensileLab : MonoBehaviour
     GameObject specimenSocket;
 
     // GameObject components
-    
-
     private XRSocketInteractor specimenSocketInteractor;
 
     #region Unity Functions
@@ -39,32 +37,33 @@ public class ManageTensileLab : MonoBehaviour
         // Update current question if correct specimen is tested
         PullLever.pulledLeverEvent += UpdateQuestion;
     }
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
     #endregion
 
     #region Lab Functions
     private void UpdateQuestion()
     {
-        print("updating question");
         currentSpecimen = checkSpecimen();
         if (currentSpecimen != lastSpecimen)
         {
             currentQuestion++;
             lastSpecimen = currentSpecimen;
         }
+        if (currentQuestion == 3 && checkSpecimen() == SpecimenType.Null)
+        {
+            currentQuestion++;
+        }
     }
 
     private SpecimenType checkSpecimen() {
         IXRSelectInteractable specimenInteractable = specimenSocketInteractor.GetOldestInteractableSelected();
-        GameObject specimen = specimenInteractable.transform.gameObject;
+        GameObject specimen;
+        try
+        {
+            specimen = specimenInteractable.transform.gameObject;
+        }
+        catch {
+            return SpecimenType.Null;
+        }
         switch (specimen.name) {
             case "Metal":
                 return SpecimenType.Metal;
@@ -74,6 +73,11 @@ public class ManageTensileLab : MonoBehaviour
                 return SpecimenType.Ceramic;
         }
         return SpecimenType.Null;
+
     }
     #endregion
+    private void OnDisable()
+    {
+        PullLever.pulledLeverEvent -= UpdateQuestion;
+    }
 }

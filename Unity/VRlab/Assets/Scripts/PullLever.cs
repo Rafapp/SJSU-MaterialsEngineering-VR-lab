@@ -14,7 +14,6 @@ public class PullLever : MonoBehaviour
     {
         if (other.gameObject.tag == "Hand")
         {
-            print("hand detected");
             leverAnimator.SetTrigger("leverAnim");
             pulledLeverEvent?.Invoke();
         }
