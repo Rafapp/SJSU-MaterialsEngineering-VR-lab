@@ -23,6 +23,8 @@ public class OptionReceiverManager : MonoBehaviour
         ConfirmButton.confirmButtonEvent += CheckSolution;
         TensileLabManager.questionChange += Reposition;
 
+        optionReceiverScripts = new OptionReceiver[optionReceiverObjects.Length];
+
         GetOptionReceiverProperties();
     }
     private void GetOptionReceiverProperties()
@@ -36,12 +38,12 @@ public class OptionReceiverManager : MonoBehaviour
     {
         for (int i = 0; i < optionReceiverObjects.Length; i++)
         {
-            optionReceiverObjects[i].transform.position = solutionReceiverPositions[ i + (TensileLabManager.Instance.currentQuestion * 4)].position;
+            // 0 metal, 1 polymer, 2 ceramic, 3 null (final question)
+            optionReceiverObjects[i].transform.position = solutionReceiverPositions[i + (TensileLabManager.Instance.specimenId * 3)].position;
         }
-        
     }
     private void CheckSolution() {
-
+        
     }
     private void OnDestroy()
     {

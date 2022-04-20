@@ -24,10 +24,6 @@ public class OptionManager : MonoBehaviour
 
         TensileLabManager.questionChange += ResetOptions;
     }
-    private void Start()
-    {
-        ResetOptions();
-    }
     private void GetOptionProperties()
     {
         for (int i = 0; i < optionObjects.Length; i++)
@@ -41,15 +37,11 @@ public class OptionManager : MonoBehaviour
         {
             optionScripts[i].optionMaterial.color = new Color(0, 255, 255, 255);
             optionScripts[i].text.text = optionText[i + (TensileLabManager.Instance.currentQuestion * 4) - 4];
+            print("index: " + (i + (TensileLabManager.Instance.currentQuestion * 4) - 4));
             optionObjects[i].transform.position = initialPositions[i].position;
             optionObjects[i].transform.rotation = initialPositions[i].rotation;
         }
     }
-
-    public void CheckSolution(int correctSolution) { 
-
-    }
-
     private void OnDisable()
     {
         TensileLabManager.questionChange -= ResetOptions;

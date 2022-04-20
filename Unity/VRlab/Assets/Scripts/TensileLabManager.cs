@@ -11,6 +11,8 @@ public class TensileLabManager : MonoBehaviour
     {
         Metal, Ceramic, Polymer, Null
     }
+    // 0 metal, 1 polymer, 2 ceramic, 3 null
+    public int specimenId;
 
     public static TensileLabManager Instance;
 
@@ -46,16 +48,17 @@ public class TensileLabManager : MonoBehaviour
     private void UpdateQuestion()
     {
         currentSpecimen = checkSpecimen();
-        if (currentSpecimen != lastSpecimen)
+        if (currentSpecimen != lastSpecimen && currentSpecimen != SpecimenType.Null)
         {
             currentQuestion++;
             lastSpecimen = currentSpecimen;
+            questionChange?.Invoke();
         }
-        if (currentQuestion == 3 && checkSpecimen() == SpecimenType.Null)
+        if (currentQuestion == 3 && currentSpecimen == SpecimenType.Null)
         {
             currentQuestion++;
+            questionChange?.Invoke();
         }
-        questionChange?.Invoke();
     }
 
     private SpecimenType checkSpecimen() {
@@ -66,14 +69,18 @@ public class TensileLabManager : MonoBehaviour
             specimen = specimenInteractable.transform.gameObject;
         }
         catch {
+            specimenId = 3;
             return SpecimenType.Null;
         }
         switch (specimen.name) {
             case "Metal":
+                specimenId = 0;
                 return SpecimenType.Metal;
             case "Polymer":
+                specimenId = 1;
                 return SpecimenType.Polymer;
             case "Ceramic":
+                specimenId = 2;
                 return SpecimenType.Ceramic;
         }
         return SpecimenType.Null;
