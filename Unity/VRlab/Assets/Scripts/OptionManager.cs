@@ -19,10 +19,14 @@ public class OptionManager : MonoBehaviour
     private void Awake()
     {
         optionScripts = new Option[optionObjects.Length];
-        GetOptionProperties();
-        ResetOptions();
 
-        PullLever.pulledLeverEvent += ResetOptions;
+        GetOptionProperties();
+
+        TensileLabManager.questionChange += ResetOptions;
+    }
+    private void Start()
+    {
+        ResetOptions();
     }
     private void GetOptionProperties()
     {
@@ -32,11 +36,11 @@ public class OptionManager : MonoBehaviour
         }
     }
     private void ResetOptions() {
-        print(TensileLabManager.Instance.currentQuestion);
+        print("Resetting options");
         for (int i = 0; i < optionObjects.Length; i++)
         {
             optionScripts[i].optionMaterial.color = new Color(0, 255, 255, 255);
-            optionScripts[i].text.text = optionText[i + (TensileLabManager.Instance.currentQuestion * 4)];
+            optionScripts[i].text.text = optionText[i + (TensileLabManager.Instance.currentQuestion * 4) - 4];
             optionObjects[i].transform.position = initialPositions[i].position;
             optionObjects[i].transform.rotation = initialPositions[i].rotation;
         }
@@ -48,6 +52,6 @@ public class OptionManager : MonoBehaviour
 
     private void OnDisable()
     {
-        PullLever.pulledLeverEvent -= ResetOptions;
+        TensileLabManager.questionChange -= ResetOptions;
     }
 }

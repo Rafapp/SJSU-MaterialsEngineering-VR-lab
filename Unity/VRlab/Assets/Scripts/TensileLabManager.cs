@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using System;
 
 public class TensileLabManager : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class TensileLabManager : MonoBehaviour
 
     public static TensileLabManager Instance;
 
-    public int currentQuestion;
+    public static event Action questionChange;
+
+    public int currentQuestion = 0;
 
     public SpecimenType currentSpecimen;
 
@@ -52,6 +55,7 @@ public class TensileLabManager : MonoBehaviour
         {
             currentQuestion++;
         }
+        questionChange?.Invoke();
     }
 
     private SpecimenType checkSpecimen() {

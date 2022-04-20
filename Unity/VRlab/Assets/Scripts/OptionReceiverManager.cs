@@ -21,7 +21,7 @@ public class OptionReceiverManager : MonoBehaviour
     private void Awake()
     {
         ConfirmButton.confirmButtonEvent += CheckSolution;
-        PullLever.pulledLeverEvent += Reposition;
+        TensileLabManager.questionChange += Reposition;
 
         GetOptionReceiverProperties();
     }
@@ -46,6 +46,6 @@ public class OptionReceiverManager : MonoBehaviour
     private void OnDestroy()
     {
         ConfirmButton.confirmButtonEvent -= CheckSolution;
-        PullLever.pulledLeverEvent -= Reposition;
+        TensileLabManager.questionChange -= Reposition;
     }
 }
