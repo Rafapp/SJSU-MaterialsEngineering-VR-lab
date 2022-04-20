@@ -1,21 +1,21 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class PullLever : MonoBehaviour
+public class ConfirmButton : MonoBehaviour
 {
     [SerializeField]
     private Animator leverAnimator;
 
-    public static event Action pulledLeverEvent;
+    public static event Action confirmButtonEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Hand")
         {
-            leverAnimator.SetTrigger("leverAnim");
-            pulledLeverEvent?.Invoke();
+            leverAnimator.SetTrigger("buttonAnim");
+            confirmButtonEvent?.Invoke();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManageUI : MonoBehaviour
+public class UImanager : MonoBehaviour
 {
     [SerializeField]
     GameObject graphObject, graphObject2;
@@ -23,7 +23,6 @@ public class ManageUI : MonoBehaviour
     private int currentQuestion;
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         PullLever.pulledLeverEvent += UpdateGraphs;
 
         graphAnimator = graphObject.GetComponent<Animator>();
@@ -34,30 +33,30 @@ public class ManageUI : MonoBehaviour
     }
     private void UpdateGraphs()
     {
-        switch (ManageTensileLab.Instance.currentSpecimen)
+        switch (TensileLabManager.Instance.currentSpecimen)
         {
             // Ceramic, grey graph
-            case ManageTensileLab.SpecimenType.Ceramic:
+            case TensileLabManager.SpecimenType.Ceramic:
                 graphBackground.sprite = graphGrids[0];
                 graphLine.sprite = graphLines[0];
                 graphAnimator.SetTrigger("AnimateGraph");
                 break;
 
             // Metal, orange
-            case ManageTensileLab.SpecimenType.Metal:
+            case TensileLabManager.SpecimenType.Metal:
                 graphBackground.sprite = graphGrids[1];
                 graphLine.sprite = graphLines[1];
                 graphAnimator.SetTrigger("AnimateGraph");
                 break;
 
             // Polymer, purple
-            case ManageTensileLab.SpecimenType.Polymer:
+            case TensileLabManager.SpecimenType.Polymer:
                 graphBackground.sprite = graphGrids[2];
                 graphLine.sprite = graphLines[2];
                 graphAnimator.SetTrigger("AnimateGraph");
                 break;
         }
-        if (ManageTensileLab.Instance.currentQuestion == 4)
+        if (TensileLabManager.Instance.currentQuestion == 4)
         {
             print("graphing allgraph");
             graphBackground.sprite = graphGrids[3];

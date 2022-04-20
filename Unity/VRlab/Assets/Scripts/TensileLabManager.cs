@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class ManageTensileLab : MonoBehaviour
+public class TensileLabManager : MonoBehaviour
 {
     // Variables and instances
     public enum SpecimenType
@@ -11,7 +11,7 @@ public class ManageTensileLab : MonoBehaviour
         Metal, Ceramic, Polymer, Null
     }
 
-    public static ManageTensileLab Instance;
+    public static TensileLabManager Instance;
 
     public int currentQuestion;
 
