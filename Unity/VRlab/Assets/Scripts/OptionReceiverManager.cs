@@ -43,7 +43,15 @@ public class OptionReceiverManager : MonoBehaviour
         }
     }
     private void CheckSolution() {
-        
+        for (int i = 0; i < optionReceiverObjects.Length; i++)
+        {
+            IXRSelectInteractable optionInteractable = optionReceiverObjects[i].GetComponent<XRSocketInteractor>().GetOldestInteractableSelected();
+            Option optionScript = optionInteractable.transform.gameObject.GetComponent<Option>();
+            if (correctSolutionID[i + (TensileLabManager.Instance.specimenId * 3)] == optionScript.optionID)
+                optionScript.optionMaterial.color = Color.green;
+            else
+                optionScript.optionMaterial.color = Color.red;
+        }
     }
     private void OnDestroy()
     {
