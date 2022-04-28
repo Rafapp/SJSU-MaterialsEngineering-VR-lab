@@ -21,8 +21,8 @@ public class WhiteboardController : MonoBehaviour
 
     private void Start()
     {
-        strokeWidth = 6;
-        strokeHeight = 6;
+        strokeWidth = 4;
+        strokeHeight = 4;
 
         whiteboardRenderer = GetComponent<Renderer>();
 
@@ -53,7 +53,6 @@ public class WhiteboardController : MonoBehaviour
                 int lerpCount = (int)(1 / lerp);
                 for (int i = 0; i <= lerpCount; i++)
                 {
-                    print($"Lerping: {i}");
                     int xVal = (int)Mathf.Lerp((float)lastPaintX, (float)texturePosX, lerp);
                     int yVal = (int)Mathf.Lerp((float)lastPaintY, (float)texturePosY, lerp);
                     textureClone.SetPixels32(xVal, yVal, strokeWidth, strokeHeight, penColor);
