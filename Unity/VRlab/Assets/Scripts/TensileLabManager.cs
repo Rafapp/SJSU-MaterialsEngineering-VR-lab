@@ -67,6 +67,7 @@ public class TensileLabManager : MonoBehaviour
         try
         {
             specimen = specimenInteractable.transform.gameObject;
+            specimen.transform.localScale += new Vector3(1, 0, 0);
         }
         catch {
             specimenId = 3;
@@ -74,12 +75,15 @@ public class TensileLabManager : MonoBehaviour
         }
         switch (specimen.name) {
             case "Metal":
+                specimen.GetComponent<Specimen>().BreakSpecimen();
                 specimenId = 0;
                 return SpecimenType.Metal;
             case "Polymer":
+                specimen.GetComponent<Specimen>().BreakSpecimen();
                 specimenId = 1;
                 return SpecimenType.Polymer;
             case "Ceramic":
+                specimen.GetComponent<Specimen>().BreakSpecimen();
                 specimenId = 2;
                 return SpecimenType.Ceramic;
         }
