@@ -74,12 +74,10 @@ public class TensileLabManager : MonoBehaviour
         }
         switch (specimen.name) {
             case "Metal":
-                specimen.transform.localScale += new Vector3(1, 0, 0);
                 specimen.GetComponent<Specimen>().BreakSpecimen();
                 specimenId = 0;
                 return SpecimenType.Metal;
             case "Polymer":
-                specimen.transform.localScale += new Vector3(1, 0, 0);
                 specimen.GetComponent<Specimen>().BreakSpecimen();
                 specimenId = 1;
                 return SpecimenType.Polymer;
