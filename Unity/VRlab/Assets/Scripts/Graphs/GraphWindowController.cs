@@ -92,6 +92,5 @@ public class GraphWindowController : MonoBehaviour
 
         // Rotate at angle between the 2 points
         rectTransform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan(dir.y/dir.x));
-        print(dir + ",  angle: " + Mathf.Tan(dir.y / dir.x));
     }
 }
