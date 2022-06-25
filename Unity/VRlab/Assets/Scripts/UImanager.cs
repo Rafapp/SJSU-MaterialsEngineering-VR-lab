@@ -28,7 +28,7 @@ public class UImanager : MonoBehaviour
         graphAnimator = graphObject.GetComponent<Animator>();
 
         graphBackground.sprite = null;
-        graphLine.sprite = null;
+        //graphLine.sprite = null;
         
     }
     private void UpdateGraphs()

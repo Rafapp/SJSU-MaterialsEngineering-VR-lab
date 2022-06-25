@@ -1,0 +1,86 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GraphWindowController : MonoBehaviour
+{
+    [SerializeField]
+    private float pointSizeX, pointSizeY, lineThickness;
+
+    [SerializeField]
+    Color pointColor, lineColor;
+
+    [SerializeField]
+    private Sprite pointSprite;
+
+    private RectTransform graphContainer;
+
+    float[] ceramicXValues, ceramicYValues;
+
+    private void Awake()
+    {
+        graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
+        ceramicXValues = new float[] { 0, 10, 20, 30, 40, 50, 60, 70, 100 };
+        ceramicYValues = new float[] { 0, 10, 20, 30, 40, 50, 60, 70, 100 };
+        RenderGraph(ceramicXValues, ceramicYValues);
+    }
+    // Creates a pint in graphContainer given a x,y vector2 position < size.x, size.y
+    private GameObject createPoint(Vector2 anchoredPosition)
+    {
+        GameObject gameObject = new GameObject("circle", typeof(Image));
+
+        gameObject.transform.SetParent(graphContainer, false);
+        gameObject.GetComponent<Image>().sprite = pointSprite;
+        gameObject.GetComponent<Image>().color = pointColor;
+
+        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+
+        rectTransform.anchoredPosition = anchoredPosition;
+        rectTransform.sizeDelta = new Vector2(pointSizeX,pointSizeY);
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(0, 0);
+
+        return gameObject;
+    }
+
+    private void RenderGraph(float[] xValues, float[] yValues)
+    {
+        float graphHeight = graphContainer.sizeDelta.y;
+        float graphWidth = graphContainer.sizeDelta.x;
+
+        float xMax = Mathf.Max(xValues); // Maximum possible X value (from data)
+        float yMax = Mathf.Max(yValues); // Maximum possible Y value (from data)
+
+        GameObject previousPointObject = null;
+        for (int i = 0; i < xValues.Length; i++)
+        {
+            // Normalize to local graph size
+            float xPos = (xValues[i] / xMax) * graphWidth; 
+            float yPos = (yValues[i] / yMax) * graphHeight;
+
+            // Render the point
+            GameObject currentPointObject = createPoint(new Vector2(xPos, yPos));
+
+            // Check if we have 2 starting points, if so connect them
+            if (previousPointObject != null)
+            {
+                ConnectPoints(previousPointObject.GetComponent<RectTransform>().anchoredPosition,
+                currentPointObject.GetComponent<RectTransform>().anchoredPosition);
+
+            }
+            previousPointObject = currentPointObject;
+        }
+    }
+
+    private void ConnectPoints(Vector2 pointA, Vector2 pointB)
+    {
+        GameObject gameObject = new GameObject("dotConnection", typeof(Image));
+        gameObject.transform.SetParent(graphContainer, false);
+        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(0, 0);
+        rectTransform.sizeDelta = new Vector2(100, lineThickness);
+        rectTransform.anchoredPosition = pointA;
+    }
+}
