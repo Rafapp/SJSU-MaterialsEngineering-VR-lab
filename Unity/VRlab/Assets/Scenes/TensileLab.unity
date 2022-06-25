@@ -1332,8 +1332,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c3c4498bef74d46bd26a277737c7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointSizeX: 2.5
-  pointSizeY: 2.5
+  pointSize: 2.5
+  lineThickness: 0.5
+  pointColor: {r: 1, g: 0.9903463, b: 0, a: 1}
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
   pointSprite: {fileID: 21300000, guid: 47b0de11997f0254193790a70d281a39, type: 3}
 --- !u!1 &230275892
 GameObject:

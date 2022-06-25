@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GraphWindowController : MonoBehaviour
 {
     [SerializeField]
-    private float pointSizeX, pointSizeY, lineThickness;
+    private float pointSize, lineThickness;
 
     [SerializeField]
     Color pointColor, lineColor;
@@ -37,7 +37,7 @@ public class GraphWindowController : MonoBehaviour
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 
         rectTransform.anchoredPosition = anchoredPosition;
-        rectTransform.sizeDelta = new Vector2(pointSizeX,pointSizeY);
+        rectTransform.sizeDelta = new Vector2(pointSize,pointSize);
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
 
@@ -76,11 +76,22 @@ public class GraphWindowController : MonoBehaviour
     private void ConnectPoints(Vector2 pointA, Vector2 pointB)
     {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
+
         gameObject.transform.SetParent(graphContainer, false);
+        gameObject.GetComponent<Image>().color = lineColor;
+
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+        Vector2 dir = (pointB - pointA).normalized;
+        float distance = Vector2.Distance(pointA, pointB);
+
+
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
-        rectTransform.sizeDelta = new Vector2(100, lineThickness);
-        rectTransform.anchoredPosition = pointA;
+        rectTransform.sizeDelta = new Vector2(distance - pointSize, lineThickness);
+        rectTransform.anchoredPosition = pointA + dir * distance * .5f;
+
+        // Rotate at angle between the 2 points
+        rectTransform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan(dir.y/dir.x));
+        print(dir + ",  angle: " + Mathf.Tan(dir.y / dir.x));
     }
 }
