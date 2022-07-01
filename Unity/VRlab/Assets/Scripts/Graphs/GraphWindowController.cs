@@ -34,8 +34,8 @@ public class GraphWindowController : MonoBehaviour
 
     private void RenderGraph(Graph graph)
     {
-        float graphHeight = graphContainer.sizeDelta.y - graph.xValues.Length * graph.yAxisOffset;
-        float graphWidth = graphContainer.sizeDelta.x - graph.xValues.Length * graph.xAxisOffset;
+        float graphHeight = graphContainer.sizeDelta.y - (2*graph.yAxisOffset);
+        float graphWidth = graphContainer.sizeDelta.x - (2 * graph.xAxisOffset);
 
         // Draw the X and Y origin lines
         DrawOriginLines(graphWidth, graphHeight, graph);
@@ -52,7 +52,7 @@ public class GraphWindowController : MonoBehaviour
             float xPos = (graph.xValues[i] / xMax) * graphWidth; 
             float yPos = (graph.yValues[i] / yMax) * graphHeight;
 
-            // Render the point
+            // Render the point, store it as a gameobject
             GameObject currentPointObject = createPoint(new Vector2(xPos + graph.xAxisOffset, 
                 yPos + graph.yAxisOffset), graph);
 
@@ -61,7 +61,6 @@ public class GraphWindowController : MonoBehaviour
             {
                 ConnectPoints(previousPointObject.GetComponent<RectTransform>().anchoredPosition,
                 currentPointObject.GetComponent<RectTransform>().anchoredPosition, graph);
-
             }
             previousPointObject = currentPointObject;
         }
@@ -89,6 +88,7 @@ public class GraphWindowController : MonoBehaviour
         return gameObject;
     }
 
+    // Connect graph points using lines
     private void ConnectPoints(Vector2 pointA, Vector2 pointB, Graph graph)
     {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
@@ -148,18 +148,7 @@ public class GraphWindowController : MonoBehaviour
              graphContainerHeight - 2 * graph.yAxisOffset);
 
         // Position correctly X and Y lines
-        xLineTransform.anchoredPosition = new Vector2(graphContainerWidth/2 - graph.xAxisOffset/2, graph.yAxisOffset);
-        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset, graphContainerHeight/2 - graph.yAxisOffset/2);
-
-    }
-
-    private void RenderAxisLines()
-    {
-
-    }
-
-    private void RenderAxisNumbers()
-    {
-
+        xLineTransform.anchoredPosition = new Vector2(graphContainerWidth / 2, graph.yAxisOffset + graph.originLineThickness/2);
+        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset + graph.originLineThickness / 2, graphContainerHeight/2);
     }
 }
