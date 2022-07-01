@@ -1332,11 +1332,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c3c4498bef74d46bd26a277737c7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointSize: 2.5
-  lineThickness: 0.5
-  pointColor: {r: 1, g: 0.9903463, b: 0, a: 1}
-  lineColor: {r: 1, g: 0, b: 0, a: 1}
   pointSprite: {fileID: 21300000, guid: 47b0de11997f0254193790a70d281a39, type: 3}
+  graphs:
+  - specimenName: Metal
+    pointSize: 3
+    lineThickness: 1
+    originLineThickness: 1
+    xAxisOffset: 5
+    yAxisOffset: 5
+    pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
+    lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
+    originLineColor: {r: 1, g: 0, b: 0, a: 0}
+    xValues:
+    - 0
+    - 10
+    - 20
+    - 30
+    - 40
+    - 50
+    - 60
+    - 70
+    - 80
+    - 90
+    - 100
+    yValues:
+    - 0
+    - 10
+    - 20
+    - 30
+    - 40
+    - 50
+    - 60
+    - 70
+    - 80
+    - 90
+    - 100
+  - specimenName: 
+    pointSize: 0
+    lineThickness: 0
+    originLineThickness: 0
+    xAxisOffset: 0
+    yAxisOffset: 0
+    pointColor: {r: 0, g: 0, b: 0, a: 0}
+    lineColor: {r: 0, g: 0, b: 0, a: 0}
+    originLineColor: {r: 0, g: 0, b: 0, a: 0}
+    xValues: []
+    yValues: []
+  - specimenName: 
+    pointSize: 0
+    lineThickness: 0
+    originLineThickness: 0
+    xAxisOffset: 0
+    yAxisOffset: 0
+    pointColor: {r: 0, g: 0, b: 0, a: 0}
+    lineColor: {r: 0, g: 0, b: 0, a: 0}
+    originLineColor: {r: 0, g: 0, b: 0, a: 0}
+    xValues: []
+    yValues: []
 --- !u!1 &230275892
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class GraphWindowController : MonoBehaviour
 {
-    [SerializeField]
-    private float pointSize, lineThickness;
-
-    [SerializeField]
-    Color pointColor, lineColor;
+    [System.Serializable]
+    public class Graph {
+        public string specimenName;
+        public float pointSize, lineThickness, originLineThickness, xAxisOffset, yAxisOffset;
+        public Color pointColor, lineColor, originLineColor;
+        public float[] xValues, yValues;
+    }
 
     [SerializeField]
     private Sprite pointSprite;
 
-    private RectTransform graphContainer;
+    [SerializeField]
+    private Graph[] graphs;
 
-    private float[] ceramicXValues, ceramicYValues; // Ceramic
-    private float[] metalXValues, metalYValues; // Metal
-    private float[] polymerXValues, polymerYValues; // Polymer
+    private RectTransform graphContainer;
 
     private float xMax, yMax;
 
@@ -26,77 +27,76 @@ public class GraphWindowController : MonoBehaviour
     private void Awake()
     {
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
-        // Ceramic data
-        ceramicXValues = new float[] { 0, 10, 20, 30, 40, 50, 60, 70, 100 };
-        ceramicYValues = new float[] { 0, 10, 20, 30, 40, 50, 60, 70, 100 };
-
-        // Metal data
-        metalXValues = new float[] { };
-        metalXValues = new float[] { };
-
-        // Polymer data
-        polymerXValues = new float[] { };
-        polymerXValues = new float[] { };
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
-        RenderGraph(ceramicXValues, ceramicYValues);
-    }
-    // Creates a pint in graphContainer given a x,y vector2 position < size.x, size.y
-    private GameObject createPoint(Vector2 anchoredPosition)
-    {
-        GameObject gameObject = new GameObject("circle", typeof(Image));
-
-        gameObject.transform.SetParent(graphContainer, false);
-        gameObject.GetComponent<Image>().sprite = pointSprite;
-        gameObject.GetComponent<Image>().color = pointColor;
-
-        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-
-        rectTransform.anchoredPosition = anchoredPosition;
-        rectTransform.sizeDelta = new Vector2(pointSize,pointSize);
-        rectTransform.anchorMin = new Vector2(0, 0);
-        rectTransform.anchorMax = new Vector2(0, 0);
-
-        return gameObject;
+        RenderGraph(graphs[0]);
     }
 
-    private void RenderGraph(float[] xValues, float[] yValues)
+    private void RenderGraph(Graph graph)
     {
-        float graphHeight = graphContainer.sizeDelta.y;
-        float graphWidth = graphContainer.sizeDelta.x;
+        float graphHeight = graphContainer.sizeDelta.y - graph.xValues.Length * graph.yAxisOffset;
+        float graphWidth = graphContainer.sizeDelta.x - graph.xValues.Length * graph.xAxisOffset;
 
-        xMax = Mathf.Max(xValues); // Maximum possible X value (from data)
-        yMax = Mathf.Max(yValues); // Maximum possible Y value (from data)
+        // Draw the X and Y origin lines
+        DrawOriginLines(graphWidth, graphHeight, graph);
+
+        xMax = Mathf.Max(graph.xValues); // Maximum possible X value (from data)
+        yMax = Mathf.Max(graph.yValues); // Maximum possible Y value (from data)
 
         GameObject previousPointObject = null;
 
         // Will need to find a way for this for loop to run slow so we can see the plot going
-        for (int i = 0; i < xValues.Length; i++)
+        for (int i = 0; i < graph.xValues.Length; i++)
         {
             // Normalize to local graph size
-            float xPos = (xValues[i] / xMax) * graphWidth; 
-            float yPos = (yValues[i] / yMax) * graphHeight;
+            float xPos = (graph.xValues[i] / xMax) * graphWidth; 
+            float yPos = (graph.yValues[i] / yMax) * graphHeight;
 
             // Render the point
-            GameObject currentPointObject = createPoint(new Vector2(xPos, yPos));
+            GameObject currentPointObject = createPoint(new Vector2(xPos + graph.xAxisOffset, 
+                yPos + graph.yAxisOffset), graph);
 
-            // Check if we have 2 starting points, if so connect them
+            // Check if we have 2 starting points, if so connect them, and start connecting all
             if (previousPointObject != null)
             {
                 ConnectPoints(previousPointObject.GetComponent<RectTransform>().anchoredPosition,
-                currentPointObject.GetComponent<RectTransform>().anchoredPosition);
+                currentPointObject.GetComponent<RectTransform>().anchoredPosition, graph);
 
             }
             previousPointObject = currentPointObject;
         }
     }
 
-    private void ConnectPoints(Vector2 pointA, Vector2 pointB)
+    // Creates a point in graphContainer given a x,y vector2 position < size.x, size.y
+    private GameObject createPoint(Vector2 anchoredPosition, Graph graph)
     {
-        GameObject gameObject = new GameObject("dotConnection", typeof(Image));
+        GameObject gameObject = new GameObject("circle", typeof(Image));
 
         gameObject.transform.SetParent(graphContainer, false);
-        gameObject.GetComponent<Image>().color = lineColor;
+        gameObject.GetComponent<Image>().sprite = pointSprite;
+
+        // Make sure color is not transparent
+        graph.pointColor.a = 1;
+        gameObject.GetComponent<Image>().color = graph.pointColor;
+
+        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+
+        rectTransform.anchoredPosition = anchoredPosition;
+        rectTransform.sizeDelta = new Vector2(graph.pointSize, graph.pointSize);
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(0, 0);
+
+        return gameObject;
+    }
+
+    private void ConnectPoints(Vector2 pointA, Vector2 pointB, Graph graph)
+    {
+        GameObject gameObject = new GameObject("dotConnection", typeof(Image));
+        gameObject.transform.SetParent(graphContainer, false);
+
+        // Make sure color is not transparent
+        graph.lineColor.a = 1;
+        gameObject.GetComponent<Image>().color = graph.lineColor;
 
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         Vector2 dir = (pointB - pointA).normalized;
@@ -105,18 +105,60 @@ public class GraphWindowController : MonoBehaviour
 
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
-        rectTransform.sizeDelta = new Vector2(distance - pointSize, lineThickness);
+        rectTransform.sizeDelta = new Vector2(distance - graph.pointSize, graph.lineThickness);
         rectTransform.anchoredPosition = pointA + dir * distance * .5f;
 
         // Rotate at angle between the 2 points
         rectTransform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan(dir.y/dir.x));
     }
 
-    private void RenderXaxis()
+    // Draw X and Y  cartesian lines
+    private void DrawOriginLines(float graphContainerWidth, float graphContainerHeight, Graph graph)
+    {
+        // Create images for the lines
+        GameObject xLine = new GameObject("xLine", typeof(Image));
+        GameObject yLine = new GameObject("yLine", typeof(Image));
+
+        // Make sure color is not transparent
+        graph.originLineColor.a = 1;
+
+        // Set line colors
+        xLine.GetComponent<Image>().color = graph.originLineColor;
+        yLine.GetComponent<Image>().color = graph.originLineColor;
+
+        // Make them children of the graphcontainer
+        xLine.transform.SetParent(graphContainer, false);
+        yLine.transform.SetParent(graphContainer, false);
+
+        // Get their transforms, set anchors
+        RectTransform xLineTransform = xLine.GetComponent<RectTransform>();
+        xLineTransform.anchorMin = new Vector2(0, 0);
+        xLineTransform.anchorMax = new Vector2(0, 0);
+
+        RectTransform yLineTransform = yLine.GetComponent<RectTransform>();
+        yLineTransform.anchorMin = new Vector2(0, 0);
+        yLineTransform.anchorMax = new Vector2(0, 0);
+
+        // Set dimensions of the X line
+        xLineTransform.sizeDelta = new Vector2(graphContainerWidth - 2 * graph.xAxisOffset,
+            graph.originLineThickness);
+
+        // Set dimensions of the Y line
+        yLineTransform.sizeDelta = new Vector2(graph.originLineThickness,
+             graphContainerHeight - 2 * graph.yAxisOffset);
+
+        // Position correctly X and Y lines
+        xLineTransform.anchoredPosition = new Vector2(graphContainerWidth/2 - graph.xAxisOffset/2, graph.yAxisOffset);
+        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset, graphContainerHeight/2 - graph.yAxisOffset/2);
+
+    }
+
+    private void RenderAxisLines()
     {
 
     }
-    private void RenderYaxis()
+
+    private void RenderAxisNumbers()
     {
 
     }
