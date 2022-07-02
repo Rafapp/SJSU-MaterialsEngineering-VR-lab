@@ -3,13 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GraphWindowController : MonoBehaviour
 {
     [System.Serializable]
     public class Graph {
         public string specimenName;
-        public float pointSize, lineThickness, originLineThickness, xAxisOffset, yAxisOffset, divisionLength;
+        [Header("The number of subdivision lines in the X and Y axis")]
+        public int xSubdivisions, ySubdivisions;
+
+        [Header("Size of graph points")]
+        public float pointSize;
+
+        [Header("Thickness of lines connecting points")]
+        public float lineThickness;
+
+        [Header("Thickness of cartesian X and Y lines")]
+        public float originLineThickness;
+
+        [Header("X and Y offset between cartesian lines, and the borders of the graph")]
+        public float xAxisOffset, yAxisOffset;
+
+        [Header("Length of the divisions perpendicular to the cartesian line")]
+        public float originDivisionLength;
+
         public Color pointColor, lineColor, originLineColor;
         public float[] xValues, yValues;
     }
@@ -63,9 +81,6 @@ public class GraphWindowController : MonoBehaviour
         float graphHeight = graphContainer.sizeDelta.y;
         float graphWidth = graphContainer.sizeDelta.x;
 
-        // Draw the X and Y origin lines
-        DrawOriginLines(graphWidth, graphHeight, graph);
-
         xMax = Mathf.Max(graph.xValues); // Maximum possible X value (from data)
         yMax = Mathf.Max(graph.yValues); // Maximum possible Y value (from data)
 
@@ -90,6 +105,9 @@ public class GraphWindowController : MonoBehaviour
             }
             previousPointObject = currentPointObject;
         }
+
+        // Draw the X and Y origin lines
+        DrawOriginLines(graphWidth, graphHeight, graph);
     }
 
     // Creates a point in graphContainer given a x,y vector2 position < size.x, size.y
@@ -180,6 +198,22 @@ public class GraphWindowController : MonoBehaviour
         yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset/2,
             graphContainerHeight / 2);
 
+        // Render X divisions
+        float xFraction = xLineTransform.sizeDelta.x / graph.xSubdivisions;
+        for (int i = 0; i < graph.xSubdivisions + 1; i++) {
+            Vector2 position = new Vector2(xFraction*i + graph.xAxisOffset/2, graph.yAxisOffset / 2);
+            Vector2 size = new Vector2(graph.lineThickness, graph.originDivisionLength);
+            RenderOriginDivision(position, size, graph);
+        }
+
+        // Render Y divisions
+        float yFraction = yLineTransform.sizeDelta.y / graph.ySubdivisions;
+        for (int i = 0; i < graph.ySubdivisions + 1; i++)
+        {
+            Vector2 position = new Vector2(graph.xAxisOffset / 2, yFraction * i + graph.yAxisOffset / 2);
+            Vector2 size = new Vector2(graph.originDivisionLength, graph.lineThickness);
+            RenderOriginDivision(position, size, graph);
+        }
     }
     // Render division at (x,y) given a vector2 position, and a length
     private void RenderOriginDivision(Vector2 position, Vector2 size, Graph graph) {
@@ -202,4 +236,13 @@ public class GraphWindowController : MonoBehaviour
         divisionTransform.sizeDelta = size;
         divisionTransform.anchoredPosition = position;
     }
+
+    // Render numbers for the X and Y origin subdivisions
+    private void RenderOriginNumbers()
+    {
+        GameObject text = new GameObject("text", typeof(TMP_Text));
+        // Render X origin numbers
+        // Render Y origin numbers
+    }
+
 }

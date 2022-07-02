@@ -1335,33 +1335,42 @@ MonoBehaviour:
   pointSprite: {fileID: 21300000, guid: 47b0de11997f0254193790a70d281a39, type: 3}
   graphs:
   - specimenName: Polymer
+    xSubdivisions: 10
+    ySubdivisions: 10
     pointSize: 3
     lineThickness: 1
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
+    originDivisionLength: 5
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
     originLineColor: {r: 1, g: 0, b: 0, a: 0}
     xValues: []
     yValues: []
   - specimenName: Metal
+    xSubdivisions: 0
+    ySubdivisions: 0
     pointSize: 3
     lineThickness: 1
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
+    originDivisionLength: 0
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
     originLineColor: {r: 1, g: 0, b: 0, a: 0}
     xValues: []
     yValues: []
   - specimenName: Ceramic
+    xSubdivisions: 0
+    ySubdivisions: 0
     pointSize: 3
     lineThickness: 1
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
+    originDivisionLength: 0
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
     originLineColor: {r: 1, g: 0, b: 0, a: 0}
