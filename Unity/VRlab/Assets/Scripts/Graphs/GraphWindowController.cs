@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class GraphWindowController : MonoBehaviour
     [System.Serializable]
     public class Graph {
         public string specimenName;
-        public float pointSize, lineThickness, originLineThickness, xAxisOffset, yAxisOffset;
+        public float pointSize, lineThickness, originLineThickness, xAxisOffset, yAxisOffset, divisionLength;
         public Color pointColor, lineColor, originLineColor;
         public float[] xValues, yValues;
     }
@@ -23,13 +24,38 @@ public class GraphWindowController : MonoBehaviour
 
     private float xMax, yMax;
 
+    // Polymer x and y data
+    double[] xDataPolymer = { 0.0011849, 0.00213482, 0.00332087, 0.00498456, 0.00736662, 0.009272, 0.0121322, 0.0140381, 0.0166594, 0.019044, 0.0226169, 0.0276222, 0.0347687, 0.0392953, 0.0431071, 0.0481081, 0.0523977, 0.0545428, 0.0574023, 0.0597877, 0.061459, 0.0631317, 0.0652833, 0.0667192, 0.0681555, 0.0707885, 0.0741391, 0.0786841, 0.0810756, 0.0858588, 0.0920761, 0.0982929, 0.105466, 0.117659, 0.130091, 0.139176, 0.146827, 0.157586, 0.167627, 0.176951, 0.1901, 0.205162, 0.213051, 0.224766, 0.235762, 0.246282, 0.259908, 0.268754, 0.278794, 0.281903 };
+    double[] yDataPolymer = { 1.52909, 2.4609, 3.82275, 5.25632, 6.52269, 7.57402, 8.84042, 9.82008, 11.0626, 11.9467, 13.8821, 16.1043, 19.8556, 22.1495, 24.1088, 26.9521, 28.9592, 29.915, 31.277, 32.0655, 32.3762, 32.4958, 32.4959, 32.281, 32.0183, 31.5407, 31.0153, 30.6334, 30.5141, 30.2516, 30.037, 29.8941, 29.8229, 29.7521, 29.6812, 29.5624, 29.4913, 29.4442, 29.3971, 29.35, 29.3031, 29.3041, 29.2569, 29.3055, 29.354, 29.3547, 29.4512, 29.4518, 29.4764, 29.4288 };
+
+    // Metal x and y data
+    double[] xDataMetal = { 0.000159017, 0.000297423, 0.000488966, 0.000755318, 0.00104255, 0.00129747, 0.00153209, 0.001819, 0.00197895, 0.0021595, 0.00231918, 0.00244646, 0.00263717, 0.00290145, 0.00327081, 0.00362896, 0.00394492, 0.00435533, 0.00463951, 0.00507079, 0.00550194, 0.00703625, 0.00916844, 0.0108742, 0.0140725, 0.0172708, 0.0215352, 0.0270789, 0.0324094, 0.0373134, 0.0405117, 0.047548, 0.0569296, 0.0680171, 0.0782516, 0.0899787, 0.102772, 0.116418, 0.130277, 0.142431, 0.156503, 0.169296, 0.183156, 0.195522, 0.20597, 0.21791, 0.230064, 0.243284, 0.254371, 0.267377, 0.277399, 0.286567, 0.295522, 0.302559, 0.310661, 0.317271, 0.324307, 0.33177, 0.33774, 0.34435, 0.350107, 0.35565, 0.360554, 0.364606, 0.366311 };
+    double[] yDataMetal = { 8.80549, 20.6814, 36.5151, 60.5511, 83.7354, 101.827, 124.451, 145.653, 160.924, 173.645, 187.217, 195.13, 205.585, 216.314, 227.314, 233.786, 239.129, 243.896, 247.545, 251.46, 254.525, 259.384, 266.947, 272.829, 280.672, 288.796, 297.199, 306.443, 314.846, 322.409, 326.05, 334.734, 345.098, 356.303, 363.305, 372.549, 382.073, 390.476, 398.88, 406.443, 413.725, 421.008, 427.171, 432.213, 437.255, 440.336, 444.258, 446.779, 447.619, 448.179, 448.459, 447.339, 446.218, 443.697, 440.336, 437.535, 432.773, 427.451, 421.569, 414.846, 408.964, 401.12, 392.997, 386.275, 383.473 };
+
+    // Ceramic x and y data
+    double[] xDataCeramic = { 1.73E-05, 4.10E-05, 5.82E-05, 7.98E-05, 0.00011857, 0.000157379, 0.000200511, 0.000237197, 0.000278128, 0.000308323, 0.000351432, 0.000409622, 0.000441974, 0.000498008, 0.000541106, 0.000579949, 0.00061659, 0.000655398, 0.000692085 };
+    double[] yDataCeramic = { 6.68858, 13.7458, 20.4363, 27.4955, 39.7549, 53.1321, 68.3682, 82.1199, 95.1225, 105.899, 120.39, 139.711, 151.231, 169.809, 183.927, 198.422, 210.683, 224.06, 237.812  };
 
     private void Awake()
     {
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
 
+        // POLYMER = GRAPHS[0] set data
+        graphs[0].xValues = xDataPolymer.Select(d => (float)d).ToArray(); 
+        graphs[0].yValues = yDataPolymer.Select(d => (float)d).ToArray();
+
+        //METAL = GRAPHS[1] set data
+        graphs[1].xValues = xDataMetal.Select(d => (float)d).ToArray();
+        graphs[1].yValues = yDataMetal.Select(d => (float)d).ToArray();
+
+        // CERAMIC = GRAPHS[2] set data
+        graphs[2].xValues = xDataCeramic.Select(d => (float)d).ToArray();
+        graphs[2].yValues = yDataCeramic.Select(d => (float)d).ToArray();
+
         // --TEST ONLY--TEST ONLY--TEST ONLY--
         RenderGraph(graphs[0]);
+        RenderGraph(graphs[1]);
+        RenderGraph(graphs[2]);
     }
 
     private void RenderGraph(Graph graph)
@@ -112,7 +138,7 @@ public class GraphWindowController : MonoBehaviour
         rectTransform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan(dir.y/dir.x));
     }
 
-    // Draw X and Y  cartesian lines
+    // Draw X and Y  cartesian lines, with the corresponding divisions
     private void DrawOriginLines(float graphContainerWidth, float graphContainerHeight, Graph graph)
     {
         // Create images for the lines
@@ -154,5 +180,26 @@ public class GraphWindowController : MonoBehaviour
         yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset/2,
             graphContainerHeight / 2);
 
+    }
+    // Render division at (x,y) given a vector2 position, and a length
+    private void RenderOriginDivision(Vector2 position, Vector2 size, Graph graph) {
+        // Create division
+        GameObject division = new GameObject("division", typeof(Image));
+
+        // Set same color as X and Y axis
+        division.GetComponent<Image>().color = graph.originLineColor;
+
+        // Parent to graph container
+        division.transform.SetParent(graphContainer, false);
+        division.transform.SetParent(graphContainer, false);
+
+        // Get transform, and set anchors to (0,0)
+        RectTransform divisionTransform = division.GetComponent<RectTransform>();
+        divisionTransform.anchorMin = new Vector2(0, 0);
+        divisionTransform.anchorMax = new Vector2(0, 0);
+
+        // Set size, and position
+        divisionTransform.sizeDelta = size;
+        divisionTransform.anchoredPosition = position;
     }
 }
