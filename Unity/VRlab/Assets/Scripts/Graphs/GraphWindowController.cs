@@ -34,8 +34,8 @@ public class GraphWindowController : MonoBehaviour
 
     private void RenderGraph(Graph graph)
     {
-        float graphHeight = graphContainer.sizeDelta.y - (2*graph.yAxisOffset);
-        float graphWidth = graphContainer.sizeDelta.x - (2 * graph.xAxisOffset);
+        float graphHeight = graphContainer.sizeDelta.y;
+        float graphWidth = graphContainer.sizeDelta.x;
 
         // Draw the X and Y origin lines
         DrawOriginLines(graphWidth, graphHeight, graph);
@@ -49,12 +49,12 @@ public class GraphWindowController : MonoBehaviour
         for (int i = 0; i < graph.xValues.Length; i++)
         {
             // Normalize to local graph size
-            float xPos = (graph.xValues[i] / xMax) * graphWidth; 
-            float yPos = (graph.yValues[i] / yMax) * graphHeight;
+            float xPos = ((graph.xValues[i] / xMax) * (graphWidth - graph.xAxisOffset)); 
+            float yPos = ((graph.yValues[i] / yMax) * (graphHeight - graph.yAxisOffset));
 
             // Render the point, store it as a gameobject
-            GameObject currentPointObject = createPoint(new Vector2(xPos + graph.xAxisOffset, 
-                yPos + graph.yAxisOffset), graph);
+            GameObject currentPointObject = createPoint(new Vector2(xPos + graph.xAxisOffset/2,
+                yPos + graph.yAxisOffset/2), graph);
 
             // Check if we have 2 starting points, if so connect them, and start connecting all
             if (previousPointObject != null)
@@ -140,15 +140,19 @@ public class GraphWindowController : MonoBehaviour
         yLineTransform.anchorMax = new Vector2(0, 0);
 
         // Set dimensions of the X line
-        xLineTransform.sizeDelta = new Vector2(graphContainerWidth - 2 * graph.xAxisOffset,
+        xLineTransform.sizeDelta = new Vector2(graphContainerWidth - graph.xAxisOffset + graph.originLineThickness,
             graph.originLineThickness);
 
         // Set dimensions of the Y line
         yLineTransform.sizeDelta = new Vector2(graph.originLineThickness,
-             graphContainerHeight - 2 * graph.yAxisOffset);
+             graphContainerHeight - graph.yAxisOffset + graph.originLineThickness);
 
         // Position correctly X and Y lines
-        xLineTransform.anchoredPosition = new Vector2(graphContainerWidth / 2, graph.yAxisOffset + graph.originLineThickness/2);
-        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset + graph.originLineThickness / 2, graphContainerHeight/2);
+        xLineTransform.anchoredPosition = new Vector2(graphContainerWidth / 2,
+            graph.yAxisOffset / 2);
+        
+        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset/2,
+            graphContainerHeight / 2);
+
     }
 }
