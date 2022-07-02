@@ -1337,8 +1337,8 @@ MonoBehaviour:
   - specimenName: Polymer
     xSubdivisions: 10
     ySubdivisions: 10
-    pointSize: 3
-    lineThickness: 1
+    pointSize: 1
+    lineThickness: 0.5
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
@@ -1351,8 +1351,8 @@ MonoBehaviour:
   - specimenName: Metal
     xSubdivisions: 0
     ySubdivisions: 0
-    pointSize: 3
-    lineThickness: 1
+    pointSize: 1
+    lineThickness: 0.5
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
@@ -1365,8 +1365,8 @@ MonoBehaviour:
   - specimenName: Ceramic
     xSubdivisions: 0
     ySubdivisions: 0
-    pointSize: 3
-    lineThickness: 1
+    pointSize: 2
+    lineThickness: 0.5
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
