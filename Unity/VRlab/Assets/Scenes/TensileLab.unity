@@ -1343,8 +1343,8 @@ MonoBehaviour:
     xAxisOffset: 20
     yAxisOffset: 20
     originDivisionLength: 5
-    numberFontSize: 20
-    numberOriginOffset: 0
+    numberFontSize: 30
+    numberOriginOffset: 1
     numberFontColor: {r: 1, g: 1, b: 1, a: 0}
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
