@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GraphWindowController : MonoBehaviour
 {
@@ -27,6 +28,15 @@ public class GraphWindowController : MonoBehaviour
 
         [Header("Length of the divisions perpendicular to the cartesian line")]
         public float originDivisionLength;
+
+        [Header("Size of the font used in X and Y axis numbering")]
+        public float numberFontSize;
+
+        [Header("Offset between the graph line and the numbers")]
+        public float numberOriginOffset;
+
+        [Header("Color for the numbers in the X and Y axis numbering")]
+        public Color numberFontColor;
 
         public Color pointColor, lineColor, originLineColor;
         public float[] xValues, yValues;
@@ -72,8 +82,6 @@ public class GraphWindowController : MonoBehaviour
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
         RenderGraph(graphs[0]);
-        RenderGraph(graphs[1]);
-        RenderGraph(graphs[2]);
     }
 
     private void RenderGraph(Graph graph)
@@ -201,18 +209,32 @@ public class GraphWindowController : MonoBehaviour
         // Render X divisions
         float xFraction = xLineTransform.sizeDelta.x / graph.xSubdivisions;
         for (int i = 0; i < graph.xSubdivisions + 1; i++) {
+            // Position and render the X subdivisions
             Vector2 position = new Vector2(xFraction*i + graph.xAxisOffset/2, graph.yAxisOffset / 2);
             Vector2 size = new Vector2(graph.lineThickness, graph.originDivisionLength);
             RenderOriginDivision(position, size, graph);
+
+            // Render the corresponding number
+            float numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
+            Vector3 xOriginTextAngle = new Vector3(0,0,90);
+            Vector2 offset = new Vector2(0, graph.numberOriginOffset + graph.originDivisionLength);
+            RenderOriginNumber(position - offset, graph, numberFractionX*i, xOriginTextAngle);
         }
 
         // Render Y divisions
         float yFraction = yLineTransform.sizeDelta.y / graph.ySubdivisions;
         for (int i = 0; i < graph.ySubdivisions + 1; i++)
         {
+            // Position and render the Y subdivisions
             Vector2 position = new Vector2(graph.xAxisOffset / 2, yFraction * i + graph.yAxisOffset / 2);
             Vector2 size = new Vector2(graph.originDivisionLength, graph.lineThickness);
             RenderOriginDivision(position, size, graph);
+
+            // Render the corresponding number
+            float numberFractionY = Mathf.Max(graph.yValues) / graph.ySubdivisions;
+            Vector3 yOriginTextAngle = new Vector3(0, 0, 0);
+            Vector2 offset = new Vector2(graph.numberOriginOffset + graph.originDivisionLength, 0);
+            RenderOriginNumber(position - offset, graph, numberFractionY * i, yOriginTextAngle);
         }
     }
     // Render division at (x,y) given a vector2 position, and a length
@@ -237,12 +259,27 @@ public class GraphWindowController : MonoBehaviour
         divisionTransform.anchoredPosition = position;
     }
 
-    // Render numbers for the X and Y origin subdivisions
-    private void RenderOriginNumbers()
+    // Render numbers for the X and Y origin subdivisions, helper function
+    private void RenderOriginNumber(Vector2 position, Graph graph, float number, Vector3 angle)
     {
-        GameObject text = new GameObject("text", typeof(TMP_Text));
-        // Render X origin numbers
-        // Render Y origin numbers
+        // Get text component and set parameters
+        GameObject text = new GameObject("text", typeof(TextMeshPro));
+        TMP_Text textComponent = text.GetComponent<TMP_Text>();
+        graph.numberFontColor.a = 1;
+        textComponent.fontSize = graph.numberFontSize;
+        textComponent.text = Math.Round(number, 2).ToString();
+        textComponent.color = graph.numberFontColor;
+        textComponent.alignment = TextAlignmentOptions.Center;
+        textComponent.alignment = TextAlignmentOptions.Midline;
+
+        // Get and set rect transform, set position
+        RectTransform transform = text.GetComponent<RectTransform>();
+        transform.anchorMin = new Vector2(0, 0);
+        transform.anchorMax = new Vector2(0, 0);
+        transform.transform.SetParent(graphContainer, false);
+
+        transform.anchoredPosition = position;
+        transform.localEulerAngles = angle;
     }
 
 }

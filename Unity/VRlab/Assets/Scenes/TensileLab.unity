@@ -1343,6 +1343,9 @@ MonoBehaviour:
     xAxisOffset: 20
     yAxisOffset: 20
     originDivisionLength: 5
+    numberFontSize: 20
+    numberOriginOffset: 0
+    numberFontColor: {r: 1, g: 1, b: 1, a: 0}
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
     originLineColor: {r: 1, g: 0, b: 0, a: 0}
@@ -1357,20 +1360,26 @@ MonoBehaviour:
     xAxisOffset: 20
     yAxisOffset: 20
     originDivisionLength: 0
+    numberFontSize: 0
+    numberOriginOffset: 0
+    numberFontColor: {r: 0, g: 0, b: 0, a: 0}
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
     originLineColor: {r: 1, g: 0, b: 0, a: 0}
     xValues: []
     yValues: []
   - specimenName: Ceramic
-    xSubdivisions: 0
-    ySubdivisions: 0
+    xSubdivisions: 10
+    ySubdivisions: 10
     pointSize: 2
     lineThickness: 0.5
     originLineThickness: 1
     xAxisOffset: 20
     yAxisOffset: 20
-    originDivisionLength: 0
+    originDivisionLength: 5
+    numberFontSize: 3
+    numberOriginOffset: 0
+    numberFontColor: {r: 0, g: 0, b: 0, a: 0}
     pointColor: {r: 1, g: 0.83232033, b: 0, a: 0}
     lineColor: {r: 0.27074933, g: 1, b: 0, a: 0}
     originLineColor: {r: 1, g: 0, b: 0, a: 0}
