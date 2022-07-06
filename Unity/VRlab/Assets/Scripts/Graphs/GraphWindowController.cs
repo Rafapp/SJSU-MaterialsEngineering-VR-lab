@@ -38,6 +38,9 @@ public class GraphWindowController : MonoBehaviour
         [Header("Color for the numbers in the X and Y axis numbering")]
         public Color numberFontColor;
 
+        [Header("Color for the graph title, and X,Y axis labels")]
+        public Color labelTitleColor;
+
         public Color pointColor, lineColor, originLineColor;
         public float[] xValues, yValues;
     }
@@ -82,6 +85,8 @@ public class GraphWindowController : MonoBehaviour
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
         RenderGraph(graphs[0]);
+        RenderGraph(graphs[1]);
+        RenderGraph(graphs[2]);
     }
 
     private void RenderGraph(Graph graph)
@@ -113,9 +118,12 @@ public class GraphWindowController : MonoBehaviour
             }
             previousPointObject = currentPointObject;
         }
-
+        if (graph != graphs[0]) return;
         // Draw the X and Y origin lines
         DrawOriginLines(graphWidth, graphHeight, graph);
+
+        // Render the many labels
+        RenderTitleAndLabels(graph);
     }
 
     // Creates a point in graphContainer given a x,y vector2 position < size.x, size.y
@@ -280,6 +288,35 @@ public class GraphWindowController : MonoBehaviour
 
         transform.anchoredPosition = position;
         transform.localEulerAngles = angle;
+    }
+
+    // Render the graph's title, the Y label and the X label
+    private void RenderTitleAndLabels(Graph graph)
+    {
+        // Render the title
+        RenderText(graph, new Vector2(graphContainer.sizeDelta.x / 2, graphContainer.sizeDelta.y), "Engineering Stress VS Engineering Strain");
+
+    }
+    private void RenderText(Graph graph, Vector2 position, String textStr)
+    {
+        // Create graph title, and position it
+        GameObject text = new GameObject("titleText", typeof(TextMeshPro));
+        TMP_Text textComponent = text.GetComponent<TMP_Text>();
+        RectTransform textTransform = text.GetComponent<RectTransform>();
+        textComponent.text = textStr;
+        textComponent.enableWordWrapping = false;
+
+        textComponent.alignment = TextAlignmentOptions.Center;
+        textComponent.alignment = TextAlignmentOptions.Midline;
+
+        textComponent.fontSize = graph.numberFontSize;
+        textTransform.transform.SetParent(graphContainer, false);
+        textTransform.anchorMin = textTransform.anchorMax = new Vector2(0, 0);
+        textTransform.anchoredPosition = position - new Vector2(0, textTransform.sizeDelta.y / 2);
+
+        // Set color for all text
+        graph.labelTitleColor.a = 1;
+        textComponent.color = graph.labelTitleColor;
     }
 
 }
