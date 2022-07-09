@@ -29,8 +29,8 @@ public class GraphWindowController : MonoBehaviour
         [Header("Length of the divisions perpendicular to the cartesian line")]
         public float originDivisionLength;
 
-        [Header("Size of the font used in X and Y axis numbering")]
-        public float numberFontSize;
+        [Header("Size of the font used in X and Y axis numbering, and labels")]
+        public float fontSize;
 
         [Header("Offset between the graph line and the numbers")]
         public float numberOriginOffset;
@@ -40,6 +40,9 @@ public class GraphWindowController : MonoBehaviour
 
         [Header("Color for the graph title, and X,Y axis labels")]
         public Color labelTitleColor;
+
+        [Header("Graph title, x label, and y label")]
+        public string graphTitle, xLabel, yLabel;
 
         public Color pointColor, lineColor, originLineColor;
         public float[] xValues, yValues;
@@ -85,10 +88,7 @@ public class GraphWindowController : MonoBehaviour
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
         RenderGraph(graphs[0]);
-        RenderGraph(graphs[1]);
-        RenderGraph(graphs[2]);
     }
-
     private void RenderGraph(Graph graph)
     {
         float graphHeight = graphContainer.sizeDelta.y;
@@ -274,7 +274,7 @@ public class GraphWindowController : MonoBehaviour
         GameObject text = new GameObject("text", typeof(TextMeshPro));
         TMP_Text textComponent = text.GetComponent<TMP_Text>();
         graph.numberFontColor.a = 1;
-        textComponent.fontSize = graph.numberFontSize;
+        textComponent.fontSize = graph.fontSize;
         textComponent.text = Math.Round(number, 2).ToString();
         textComponent.color = graph.numberFontColor;
         textComponent.alignment = TextAlignmentOptions.Center;
@@ -293,11 +293,19 @@ public class GraphWindowController : MonoBehaviour
     // Render the graph's title, the Y label and the X label
     private void RenderTitleAndLabels(Graph graph)
     {
+        Vector3 horizontal = new Vector3(0, 0, 0);
+        Vector3 vertical = new Vector3(0, 0, 90);
         // Render the title
-        RenderText(graph, new Vector2(graphContainer.sizeDelta.x / 2, graphContainer.sizeDelta.y), "Engineering Stress VS Engineering Strain");
+        RenderText(graph, new Vector2(graphContainer.sizeDelta.x / 2, graphContainer.sizeDelta.y - graph.fontSize/2), graph.graphTitle, horizontal);
+
+        // Render the x label
+        RenderText(graph, new Vector2(graphContainer.sizeDelta.x / 2, graph.yAxisOffset/2 - graph.fontSize/2), graph.xLabel, horizontal);
+
+        // Render the y label
+        RenderText(graph, new Vector2(graph.xAxisOffset/2 - graph.fontSize/2, graphContainer.sizeDelta.y / 2), graph.yLabel, vertical);
 
     }
-    private void RenderText(Graph graph, Vector2 position, String textStr)
+    private void RenderText(Graph graph, Vector2 position, String textStr, Vector3 angle)
     {
         // Create graph title, and position it
         GameObject text = new GameObject("titleText", typeof(TextMeshPro));
@@ -309,10 +317,11 @@ public class GraphWindowController : MonoBehaviour
         textComponent.alignment = TextAlignmentOptions.Center;
         textComponent.alignment = TextAlignmentOptions.Midline;
 
-        textComponent.fontSize = graph.numberFontSize;
+        textComponent.fontSize = graph.fontSize;
         textTransform.transform.SetParent(graphContainer, false);
         textTransform.anchorMin = textTransform.anchorMax = new Vector2(0, 0);
         textTransform.anchoredPosition = position - new Vector2(0, textTransform.sizeDelta.y / 2);
+        textTransform.localEulerAngles = angle;
 
         // Set color for all text
         graph.labelTitleColor.a = 1;
