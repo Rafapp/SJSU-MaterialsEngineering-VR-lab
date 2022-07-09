@@ -14,6 +14,11 @@ public class GraphWindowController : MonoBehaviour
         [Header("The number of subdivision lines in the X and Y axis")]
         public int xSubdivisions, ySubdivisions;
 
+        public TMP_FontAsset textFont;
+
+        [Header("Speed with which the graph renders")]
+        public float graphSpeed;
+
         [Header("Size of graph points")]
         public float pointSize;
 
@@ -87,9 +92,13 @@ public class GraphWindowController : MonoBehaviour
         graphs[2].yValues = yDataCeramic.Select(d => (float)d).ToArray();
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
-        RenderGraph(graphs[0]);
+        //RenderGraph(graphs[2]);
     }
-    private void RenderGraph(Graph graph)
+    public void RenderGraph(int index, bool renderNumbers)
+    {
+        StartCoroutine(SlowRenderGraph(graphs[index], renderNumbers));
+    }
+    IEnumerator SlowRenderGraph(Graph graph, bool renderNumbers)
     {
         float graphHeight = graphContainer.sizeDelta.y;
         float graphWidth = graphContainer.sizeDelta.x;
@@ -99,16 +108,22 @@ public class GraphWindowController : MonoBehaviour
 
         GameObject previousPointObject = null;
 
+        // Draw the X and Y origin lines
+        DrawOriginLines(graphWidth, graphHeight, graph, renderNumbers);
+
+        // Render the many labels
+        RenderTitleAndLabels(graph);
+
         // Will need to find a way for this for loop to run slow so we can see the plot going
         for (int i = 0; i < graph.xValues.Length; i++)
         {
             // Normalize to local graph size
-            float xPos = ((graph.xValues[i] / xMax) * (graphWidth - graph.xAxisOffset)); 
+            float xPos = ((graph.xValues[i] / xMax) * (graphWidth - graph.xAxisOffset));
             float yPos = ((graph.yValues[i] / yMax) * (graphHeight - graph.yAxisOffset));
 
             // Render the point, store it as a gameobject
-            GameObject currentPointObject = createPoint(new Vector2(xPos + graph.xAxisOffset/2,
-                yPos + graph.yAxisOffset/2), graph);
+            GameObject currentPointObject = createPoint(new Vector2(xPos + graph.xAxisOffset / 2,
+                yPos + graph.yAxisOffset / 2), graph);
 
             // Check if we have 2 starting points, if so connect them, and start connecting all
             if (previousPointObject != null)
@@ -117,13 +132,8 @@ public class GraphWindowController : MonoBehaviour
                 currentPointObject.GetComponent<RectTransform>().anchoredPosition, graph);
             }
             previousPointObject = currentPointObject;
+            yield return new WaitForSeconds(graph.graphSpeed);
         }
-        if (graph != graphs[0]) return;
-        // Draw the X and Y origin lines
-        DrawOriginLines(graphWidth, graphHeight, graph);
-
-        // Render the many labels
-        RenderTitleAndLabels(graph);
     }
 
     // Creates a point in graphContainer given a x,y vector2 position < size.x, size.y
@@ -173,7 +183,7 @@ public class GraphWindowController : MonoBehaviour
     }
 
     // Draw X and Y  cartesian lines, with the corresponding divisions
-    private void DrawOriginLines(float graphContainerWidth, float graphContainerHeight, Graph graph)
+    private void DrawOriginLines(float graphContainerWidth, float graphContainerHeight, Graph graph, bool renderNumbers)
     {
         // Create images for the lines
         GameObject xLine = new GameObject("xLine", typeof(Image));
@@ -226,7 +236,9 @@ public class GraphWindowController : MonoBehaviour
             float numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
             Vector3 xOriginTextAngle = new Vector3(0,0,90);
             Vector2 offset = new Vector2(0, graph.numberOriginOffset + graph.originDivisionLength);
-            RenderOriginNumber(position - offset, graph, numberFractionX*i, xOriginTextAngle);
+
+            if (renderNumbers)
+                RenderOriginNumber(position - offset, graph, numberFractionX*i, xOriginTextAngle);
         }
 
         // Render Y divisions
@@ -242,7 +254,9 @@ public class GraphWindowController : MonoBehaviour
             float numberFractionY = Mathf.Max(graph.yValues) / graph.ySubdivisions;
             Vector3 yOriginTextAngle = new Vector3(0, 0, 0);
             Vector2 offset = new Vector2(graph.numberOriginOffset + graph.originDivisionLength, 0);
-            RenderOriginNumber(position - offset, graph, numberFractionY * i, yOriginTextAngle);
+
+            if(renderNumbers)
+                RenderOriginNumber(position - offset, graph, numberFractionY * i, yOriginTextAngle);
         }
     }
     // Render division at (x,y) given a vector2 position, and a length
@@ -279,6 +293,7 @@ public class GraphWindowController : MonoBehaviour
         textComponent.color = graph.numberFontColor;
         textComponent.alignment = TextAlignmentOptions.Center;
         textComponent.alignment = TextAlignmentOptions.Midline;
+        textComponent.font = graph.textFont;
 
         // Get and set rect transform, set position
         RectTransform transform = text.GetComponent<RectTransform>();
@@ -325,7 +340,18 @@ public class GraphWindowController : MonoBehaviour
 
         // Set color for all text
         graph.labelTitleColor.a = 1;
+        textComponent.font = graph.textFont;
         textComponent.color = graph.labelTitleColor;
     }
+    public void clearChildren()
+    {
+        foreach (Transform child in graphContainer.transform) {
+            if(child.gameObject.name != "Background")
+                GameObject.Destroy(child.gameObject);
+        }
+    }
+
+    // Y max: 383.783
+    // X max: .366
 
 }
