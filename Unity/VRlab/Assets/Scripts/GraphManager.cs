@@ -5,9 +5,9 @@ using UnityEngine;
 public class GraphManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject singleSpecimenGraph, multipleSpecimenGraph;
+    GameObject singleSpecimenGraph, polymerGraph, metalGraph, ceramicGraph, allGraph;
 
-    private GraphWindowController singleSpecimenGraphController, multipleSpecimenGraphController;
+    private GraphWindowController singleSpecimenGraphController, polymerGraphController, metalGraphController, ceramicGraphController, allGraphController;
 
     public static GraphManager Instance;
     private void Awake()
@@ -16,7 +16,12 @@ public class GraphManager : MonoBehaviour
         else Instance = this;
 
         singleSpecimenGraphController = singleSpecimenGraph.GetComponentInChildren<GraphWindowController>();
-        multipleSpecimenGraphController = multipleSpecimenGraph.GetComponentInChildren<GraphWindowController>();
+        polymerGraphController = polymerGraph.GetComponentInChildren<GraphWindowController>();
+        metalGraphController = metalGraph.GetComponentInChildren<GraphWindowController>();
+        ceramicGraphController = ceramicGraph.GetComponentInChildren<GraphWindowController>();
+        allGraphController = allGraph.GetComponentInChildren<GraphWindowController>();
+
+        //StartCoroutine(graphs());
     }
     private void OnEnable()
     {
@@ -30,17 +35,20 @@ public class GraphManager : MonoBehaviour
             case (TensileLabManager.SpecimenType.Polymer):
                 singleSpecimenGraphController.clearChildren();
                 singleSpecimenGraphController.RenderGraph(0, true);
-                multipleSpecimenGraphController.RenderGraph(0, false);
+                polymerGraphController.RenderGraph(0, true);
+                allGraphController.RenderGraph(0, false);
                 return;
             case (TensileLabManager.SpecimenType.Metal):
                 singleSpecimenGraphController.clearChildren();
                 singleSpecimenGraphController.RenderGraph(1, true);
-                multipleSpecimenGraphController.RenderGraph(1, false);
+                metalGraphController.RenderGraph(1, true);
+                allGraphController.RenderGraph(1, false);
                 return;
             case (TensileLabManager.SpecimenType.Ceramic):
                 singleSpecimenGraphController.clearChildren();
                 singleSpecimenGraphController.RenderGraph(2, true);
-                multipleSpecimenGraphController.RenderGraph(2, false);
+                ceramicGraphController.RenderGraph(2, true);
+                allGraphController.RenderGraph(2, false);
                 return;
 
         }

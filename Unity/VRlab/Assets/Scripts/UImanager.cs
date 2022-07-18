@@ -1,29 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-public class UImanager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject graphObject, graphObject2;
-
-    [SerializeField]
-    Image graphBackground, graphLine;
-
-    private Animator graphAnimator;
-
-    [SerializeField]
-    [Header("0 = ceramic(grey),\n 1 = metal(yellow),\n 2 = Polymer(purple),\n 3 = allGraphs")]
-    Sprite[] graphGrids;
-
-    [SerializeField]
-    Sprite[] graphLines;
-
-    private int currentQuestion;
-
-    private void UpdateQuiz()
+    private TMP_Text UItext;
+    private void OnEnable()
     {
-
+        TensileLabManager.questionChange += updateText;
+    }
+    private void updateText()
+    {
+        switch (TensileLabManager.Instance.currentQuestion)
+        {
+            case (1):
+                UItext.text = "Well done! Now look at the graphs at your right, drag and drop solutions to the quiz and press check.";
+                return;
+            case (2):
+                UItext.text = "Amazing! Look at the graph again, and solve the quiz";
+                return;
+            case (3):
+                UItext.text = "You're great! You may solve the third quiz. After finishing, remove the specimen from the machine and pull lever";
+                return;
+            case (4):
+                UItext.text = "Great job! Please respond the final quiz";
+                return;
+        }
+    }
+    private void OnDestroy()
+    {
+        TensileLabManager.questionChange -= updateText;
     }
 }

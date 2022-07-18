@@ -289,7 +289,10 @@ public class GraphWindowController : MonoBehaviour
         TMP_Text textComponent = text.GetComponent<TMP_Text>();
         graph.numberFontColor.a = 1;
         textComponent.fontSize = graph.fontSize;
-        textComponent.text = Math.Round(number, 2).ToString();
+        if(graph.specimenName != "Ceramic")
+            textComponent.text = Math.Round(number, 2).ToString();
+        else
+            textComponent.text = Math.Round(number, 5).ToString();
         textComponent.color = graph.numberFontColor;
         textComponent.alignment = TextAlignmentOptions.Center;
         textComponent.alignment = TextAlignmentOptions.Midline;

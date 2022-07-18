@@ -17,4 +17,9 @@ public class Specimen : MonoBehaviour
         meshRenderer.enabled = false;
         brokenChild.SetActive(true);
     }
+    public void ConnectSpecimen()
+    {
+        meshRenderer.enabled = true;
+        brokenChild.SetActive(false);
+    }
 }
