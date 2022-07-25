@@ -14,6 +14,8 @@ public class GraphWindowController : MonoBehaviour
         [Header("The number of subdivision lines in the X and Y axis")]
         public int xSubdivisions, ySubdivisions;
 
+        public bool percentageGraph;
+
         public TMP_FontAsset textFont;
 
         [Header("Speed with which the graph renders")]
@@ -233,12 +235,17 @@ public class GraphWindowController : MonoBehaviour
             RenderOriginDivision(position, size, graph);
 
             // Render the corresponding number
-            float numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
+            // If percentage graph, draw 
+            float numberFractionX;
+            if (!graph.percentageGraph)
+                numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
+            else
+                numberFractionX = 100 / graph.xSubdivisions;
             Vector3 xOriginTextAngle = new Vector3(0,0,90);
             Vector2 offset = new Vector2(0, graph.numberOriginOffset + graph.originDivisionLength);
 
             if (renderNumbers)
-                RenderOriginNumber(position - offset, graph, numberFractionX*i, xOriginTextAngle);
+                RenderOriginNumber(position - offset, graph, numberFractionX*i, xOriginTextAngle, true);
         }
 
         // Render Y divisions
@@ -256,7 +263,7 @@ public class GraphWindowController : MonoBehaviour
             Vector2 offset = new Vector2(graph.numberOriginOffset + graph.originDivisionLength, 0);
 
             if(renderNumbers)
-                RenderOriginNumber(position - offset, graph, numberFractionY * i, yOriginTextAngle);
+                RenderOriginNumber(position - offset, graph, numberFractionY * i, yOriginTextAngle, false);
         }
     }
     // Render division at (x,y) given a vector2 position, and a length
@@ -282,17 +289,20 @@ public class GraphWindowController : MonoBehaviour
     }
 
     // Render numbers for the X and Y origin subdivisions, helper function
-    private void RenderOriginNumber(Vector2 position, Graph graph, float number, Vector3 angle)
+    // AddPercent will only be true for X values unless otherwise specified
+    private void RenderOriginNumber(Vector2 position, Graph graph, float number, Vector3 angle, bool addPercent)
     {
         // Get text component and set parameters
         GameObject text = new GameObject("text", typeof(TextMeshPro));
         TMP_Text textComponent = text.GetComponent<TMP_Text>();
         graph.numberFontColor.a = 1;
+
         textComponent.fontSize = graph.fontSize;
-        if(graph.specimenName != "Ceramic")
-            textComponent.text = Math.Round(number, 2).ToString();
-        else
-            textComponent.text = Math.Round(number, 5).ToString();
+        textComponent.text = Math.Round(number, 2).ToString();
+        // If percentage graph, add percentage symbol
+        if (graph.percentageGraph && addPercent)
+            textComponent.text += "%";
+
         textComponent.color = graph.numberFontColor;
         textComponent.alignment = TextAlignmentOptions.Center;
         textComponent.alignment = TextAlignmentOptions.Midline;

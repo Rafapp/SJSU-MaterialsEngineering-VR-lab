@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class Specimen : MonoBehaviour
 {
-    public SkinnedMeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
     public GameObject brokenChild;
+    public Material FracturedMaterial;
     private void Start()
     {
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
         brokenChild.SetActive(false);
     }
     public void BreakSpecimen()
@@ -19,7 +21,9 @@ public class Specimen : MonoBehaviour
     }
     public void ConnectSpecimen()
     {
+        if (meshRenderer.enabled == true) return;
         meshRenderer.enabled = true;
+        meshRenderer.material = FracturedMaterial;
         brokenChild.SetActive(false);
     }
 }

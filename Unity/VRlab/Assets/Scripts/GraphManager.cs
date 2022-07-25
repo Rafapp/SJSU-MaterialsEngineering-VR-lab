@@ -20,8 +20,6 @@ public class GraphManager : MonoBehaviour
         metalGraphController = metalGraph.GetComponentInChildren<GraphWindowController>();
         ceramicGraphController = ceramicGraph.GetComponentInChildren<GraphWindowController>();
         allGraphController = allGraph.GetComponentInChildren<GraphWindowController>();
-
-        //StartCoroutine(graphs());
     }
     private void OnEnable()
     {
