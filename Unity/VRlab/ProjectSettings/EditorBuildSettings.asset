@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f8c5b44fa08bc7a4eb68dd38c5682072
+  - enabled: 1
+    path: Assets/Scenes/TensileLab.unity
+    guid: d5bdbb0f8d11e904da1fac3d0e8a6d75
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1cf43cf8898bb7e46ad94ff7e6da3e12, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 99e53048e079dbd45a8b3315f1c2f56f, type: 2}
