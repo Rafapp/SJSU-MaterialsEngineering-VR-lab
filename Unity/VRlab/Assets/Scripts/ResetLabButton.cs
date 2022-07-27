@@ -21,6 +21,6 @@ public class ResetLabButton : MonoBehaviour
     private void ReloadScene()
     {
         Destroy(TensileLabManager.Instance.gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
     }
 }

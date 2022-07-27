@@ -1486,8 +1486,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "1.- Type your \nstudent id"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
-  m_sharedMaterial: {fileID: 2319352067232038932, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a59527a62b12174387ccd502e98f6d7, type: 2}
+  m_sharedMaterial: {fileID: 7421759240860508480, guid: 4a59527a62b12174387ccd502e98f6d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3361,8 +3361,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Welcome to the SJSU \nMaterials Engineering Lab!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
-  m_sharedMaterial: {fileID: 2319352067232038932, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a59527a62b12174387ccd502e98f6d7, type: 2}
+  m_sharedMaterial: {fileID: 7421759240860508480, guid: 4a59527a62b12174387ccd502e98f6d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5688,8 +5688,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "2.-Walk inside a lab \nenvironment"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
-  m_sharedMaterial: {fileID: 2319352067232038932, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a59527a62b12174387ccd502e98f6d7, type: 2}
+  m_sharedMaterial: {fileID: 7421759240860508480, guid: 4a59527a62b12174387ccd502e98f6d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

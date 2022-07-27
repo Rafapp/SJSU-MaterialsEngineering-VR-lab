@@ -222,30 +222,41 @@ public class GraphWindowController : MonoBehaviour
         // Position correctly X and Y lines
         xLineTransform.anchoredPosition = new Vector2(graphContainerWidth / 2,
             graph.yAxisOffset / 2);
-        
-        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset/2,
+
+        yLineTransform.anchoredPosition = new Vector2(graph.xAxisOffset / 2,
             graphContainerHeight / 2);
 
         // Render X divisions
         float xFraction = xLineTransform.sizeDelta.x / graph.xSubdivisions;
-        for (int i = 0; i < graph.xSubdivisions + 1; i++) {
+        for (int i = 0; i < graph.xSubdivisions; i++)
+        {
             // Position and render the X subdivisions
-            Vector2 position = new Vector2(xFraction*i + graph.xAxisOffset/2, graph.yAxisOffset / 2);
+            Vector2 position = new Vector2(xFraction * i + graph.xAxisOffset / 2, graph.yAxisOffset / 2);
             Vector2 size = new Vector2(graph.lineThickness, graph.originDivisionLength);
             RenderOriginDivision(position, size, graph);
 
-            // Render the corresponding number
-            // If percentage graph, draw 
-            float numberFractionX;
-            if (!graph.percentageGraph)
-                numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
-            else
-                numberFractionX = 100 / graph.xSubdivisions;
-            Vector3 xOriginTextAngle = new Vector3(0,0,90);
+            // Guard clause if we don't want numbers to render
+            if (!renderNumbers) return;
+
+            float numberFractionX = 0;
+            Vector3 xOriginTextAngle = new Vector3(0, 0, 90);
             Vector2 offset = new Vector2(0, graph.numberOriginOffset + graph.originDivisionLength);
 
-            if (renderNumbers)
-                RenderOriginNumber(position - offset, graph, numberFractionX*i, xOriginTextAngle, true);
+            // If percentage graph, draw as a percent
+            if (graph.percentageGraph)
+            {
+                float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
+                int index = i * (int)ratio;
+                print(index);
+                //print((graph.xValues[index] * 100) / Mathf.Max(graph.xValues));
+                RenderOriginNumber(position - offset, graph, (graph.xValues[index] *100)/Mathf.Max(graph.xValues), xOriginTextAngle, true);
+            }
+            // If regular graph, use standard numbering
+            else
+            {
+                numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
+                RenderOriginNumber(position - offset, graph, numberFractionX * i, xOriginTextAngle, true);
+            }
         }
 
         // Render Y divisions
@@ -262,7 +273,7 @@ public class GraphWindowController : MonoBehaviour
             Vector3 yOriginTextAngle = new Vector3(0, 0, 0);
             Vector2 offset = new Vector2(graph.numberOriginOffset + graph.originDivisionLength, 0);
 
-            if(renderNumbers)
+            if (renderNumbers)
                 RenderOriginNumber(position - offset, graph, numberFractionY * i, yOriginTextAngle, false);
         }
     }
