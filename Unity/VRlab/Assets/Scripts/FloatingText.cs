@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+public class FloatingText : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text UItext;
@@ -11,12 +11,14 @@ public class UIManager : MonoBehaviour
     {
         TensileLabManager.questionChange += updateText;
     }
+
+    // The check button will make the "default text" run which just says, grab another specimen
     private void updateText()
     {
         switch (TensileLabManager.Instance.currentQuestion)
         {
             case (1):
-                UItext.text = "Well done! Now look at the graphs at your right, drag and drop solutions to the quiz and press check.";
+                UItext.text = "Well done! Now look at the graphs at your right, drag and drop solutions to the quiz and press check    .";
                 return;
             case (2):
                 UItext.text = "Amazing! Look at the graph again, and solve the quiz";
