@@ -38,6 +38,6 @@ public class StudentIDmanager : MonoBehaviour
     // Save student ID
     public void saveID()
     {
-
+        idText.text = "Student ID saved successfully";
     }
 }

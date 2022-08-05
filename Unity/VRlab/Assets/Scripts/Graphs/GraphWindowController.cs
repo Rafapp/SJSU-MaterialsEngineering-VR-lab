@@ -245,11 +245,20 @@ public class GraphWindowController : MonoBehaviour
             // If percentage graph, draw as a percent
             if (graph.percentageGraph)
             {
+                /* OLD MATH
+                 * 
                 float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
                 int index = i * (int)ratio;
                 print(index);
                 //print((graph.xValues[index] * 100) / Mathf.Max(graph.xValues));
                 RenderOriginNumber(position - offset, graph, (graph.xValues[index] *100)/Mathf.Max(graph.xValues), xOriginTextAngle, true);
+                */
+
+                float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
+                int index = i * (int)ratio;
+
+                // Multiplying by 100 the values
+                RenderOriginNumber(position - offset, graph, graph.xValues[index] * 100, xOriginTextAngle, true);
             }
             // If regular graph, use standard numbering
             else
@@ -309,7 +318,10 @@ public class GraphWindowController : MonoBehaviour
         graph.numberFontColor.a = 1;
 
         textComponent.fontSize = graph.fontSize;
+
+        // Round to 2 decimals
         textComponent.text = Math.Round(number, 2).ToString();
+
         // If percentage graph, add percentage symbol
         if (graph.percentageGraph && addPercent)
             textComponent.text += "%";

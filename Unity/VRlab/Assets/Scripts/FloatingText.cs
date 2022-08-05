@@ -10,6 +10,7 @@ public class FloatingText : MonoBehaviour
     private void OnEnable()
     {
         TensileLabManager.questionChange += updateText;
+        ConfirmButton.confirmButtonEvent += specimenText;
     }
 
     // The check button will make the "default text" run which just says, grab another specimen
@@ -31,8 +32,17 @@ public class FloatingText : MonoBehaviour
                 return;
         }
     }
+
+    private void specimenText()
+    {
+        if (TensileLabManager.Instance.currentQuestion >= 4)
+            UItext.text = "Now, please pull the lever again with an empty specimen";
+        else
+        UItext.text = "Good. Check answers until all are right. After all are correct, test another specimen";
+    }
     private void OnDestroy()
     {
         TensileLabManager.questionChange -= updateText;
+        ConfirmButton.confirmButtonEvent -= specimenText;
     }
 }
