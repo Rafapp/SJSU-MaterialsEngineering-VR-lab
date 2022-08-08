@@ -319,8 +319,8 @@ public class GraphWindowController : MonoBehaviour
 
         textComponent.fontSize = graph.fontSize;
 
-        // Round to 2 decimals
-        textComponent.text = Math.Round(number, 2).ToString();
+        // Round to 0 decimals
+        textComponent.text = Math.Round(number, 1).ToString();
 
         // If percentage graph, add percentage symbol
         if (graph.percentageGraph && addPercent)

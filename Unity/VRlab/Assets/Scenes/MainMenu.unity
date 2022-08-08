@@ -841,7 +841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Poisson Ratio
+  m_text: Poisson's Ratio
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
   m_sharedMaterial: {fileID: 2319352067232038932, guid: a2ba059787f0d1749a9a9b72e0302105, type: 2}
@@ -4032,7 +4032,7 @@ GameObject:
   - component: {fileID: 1436050538}
   - component: {fileID: 1436050537}
   m_Layer: 5
-  m_Name: TensileLabPic (1)
+  m_Name: PoissonLabPic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4070,6 +4070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de194953db25fe4f88199a85beed8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: 2
 --- !u!65 &1436050538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4103,7 +4104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a08ee03f518e5f14b83fd1d232d8f546, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8adb88638cd9d814bb3c2b48409df8bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4224,6 +4225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de194953db25fe4f88199a85beed8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: 1
 --- !u!1 &1473280625
 GameObject:
   m_ObjectHideFlags: 0
@@ -5877,7 +5879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Student id saved
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
