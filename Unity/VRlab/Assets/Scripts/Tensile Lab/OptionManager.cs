@@ -35,7 +35,7 @@ public class OptionManager : MonoBehaviour
         
         for (int i = 0; i < optionObjects.Length; i++)
         {
-            optionObjects[i].transform.parent = optionObjects[i].transform;
+            optionObjects[i].transform.parent = null;
 
             optionObjects[i].transform.position = initialPositions[i].position;
             optionObjects[i].transform.rotation = initialPositions[i].rotation;
