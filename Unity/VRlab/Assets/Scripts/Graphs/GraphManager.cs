@@ -21,7 +21,7 @@ public class GraphManager : MonoBehaviour
         ceramicGraphController = ceramicGraph.GetComponentInChildren<GraphWindowController>();
         allGraphController = allGraph.GetComponentInChildren<GraphWindowController>();
 
-        //testGraph();
+        testGraph();
     }
     private void testGraph()
     {

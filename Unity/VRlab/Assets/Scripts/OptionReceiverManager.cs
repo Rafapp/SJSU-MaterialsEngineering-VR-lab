@@ -6,6 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [System.Serializable]
 public class OptionReceiverManager : MonoBehaviour
 {
+    public static OptionReceiverManager Instance;
+
     [SerializeField]
     private Transform[] solutionReceiverPositions;
 
@@ -20,6 +22,9 @@ public class OptionReceiverManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this) Destroy(Instance);
+        else Instance = this;
+
         ConfirmButton.confirmButtonEvent += CheckSolution;
         TensileLabManager.questionChange += Reposition;
 
@@ -42,7 +47,8 @@ public class OptionReceiverManager : MonoBehaviour
             optionReceiverObjects[i].transform.position = solutionReceiverPositions[i + (TensileLabManager.Instance.specimenId * 3)].position;
         }
     }
-    private void CheckSolution() {
+    private void CheckSolution()
+    {
         for (int i = 0; i < optionReceiverObjects.Length; i++)
         {
             IXRSelectInteractable optionInteractable = optionReceiverObjects[i].GetComponent<XRSocketInteractor>().GetOldestInteractableSelected();
@@ -52,6 +58,18 @@ public class OptionReceiverManager : MonoBehaviour
             else
                 optionScript.optionMaterial.color = Color.red;
         }
+
+        for (int i = 0; i < optionReceiverObjects.Length; i++)
+        {
+            IXRSelectInteractable optionInteractable = optionReceiverObjects[i].GetComponent<XRSocketInteractor>().GetOldestInteractableSelected();
+            Option optionScript = optionInteractable.transform.gameObject.GetComponent<Option>();
+            // If any question is wrong, we return
+            if (!(correctSolutionID[i + (TensileLabManager.Instance.specimenId * 3)] == optionScript.optionID))
+                return;
+                
+        }
+        // All solutions are correct, so we switch arrows back to the specimen
+        ArrowManager.Instance.SwitchArrows();
     }
     private void OnDestroy()
     {

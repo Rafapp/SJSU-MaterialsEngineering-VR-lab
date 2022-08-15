@@ -319,12 +319,16 @@ public class GraphWindowController : MonoBehaviour
 
         textComponent.fontSize = graph.fontSize;
 
-        // Round to 0 decimals
-        textComponent.text = Math.Round(number, 1).ToString();
-
         // If percentage graph, add percentage symbol
+        // Add 2 decimals for X axis
         if (graph.percentageGraph && addPercent)
+        {
             textComponent.text += "%";
+            textComponent.text = Math.Round(number, 2).ToString();
+        }
+        // Round to 0 decimals on Y axis
+        else textComponent.text = Math.Round(number, 0).ToString();
+
 
         textComponent.color = graph.numberFontColor;
         textComponent.alignment = TextAlignmentOptions.Center;

@@ -32,11 +32,15 @@ public class OptionManager : MonoBehaviour
         }
     }
     private void ResetOptions() {
+        
         for (int i = 0; i < optionObjects.Length; i++)
         {
-            optionScripts[i].text.text = optionText[i + (TensileLabManager.Instance.currentQuestion * 4) - 4];
+            optionObjects[i].transform.parent = optionObjects[i].transform;
+
             optionObjects[i].transform.position = initialPositions[i].position;
             optionObjects[i].transform.rotation = initialPositions[i].rotation;
+
+            optionScripts[i].text.text = optionText[i + (TensileLabManager.Instance.currentQuestion * 4) - 4];
             optionScripts[i].optionMaterial.color = new Color32(0, 255, 255, 255);
             optionScripts[i].optionMaterial.color = new Color32(0, 255, 255, 255);
         }

@@ -50,6 +50,7 @@ public class TensileLabManager : MonoBehaviour
         currentSpecimen = checkSpecimen();
         if (currentSpecimen != lastSpecimen && currentSpecimen != SpecimenType.Null)
         {
+            ArrowManager.Instance.SwitchArrows();
             currentQuestion++;
             lastSpecimen = currentSpecimen;
             questionChange?.Invoke();
