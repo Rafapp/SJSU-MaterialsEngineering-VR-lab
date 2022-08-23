@@ -11,7 +11,7 @@ public class SpecimenController : MonoBehaviour
     private GameObject specimen, transparentSpecimen;
 
     [SerializeField]
-    private float poissonRatio;
+    private float poissonRatio, offset;
 
     private Vector3 initialScale;
 
@@ -23,7 +23,7 @@ public class SpecimenController : MonoBehaviour
         initialScale = gameObject.GetComponent<Transform>().localScale;
 
         // Elongate or compress the shape using the handles, center shape
-        specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + .75f, specimen.transform.localScale.z * poissonRatio + .75f,
+        specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + offset, specimen.transform.localScale.z * poissonRatio + offset,
             ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
 
         // Update the transparent shape to match
@@ -34,7 +34,7 @@ public class SpecimenController : MonoBehaviour
         //Note: This is intensive, must only happen when grabbing both handles
 
         // Elongate or compress the shape using the handles, center shape
-        specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + .75f, specimen.transform.localScale.z * poissonRatio + .75f,
+        specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + offset, specimen.transform.localScale.z * poissonRatio + offset,
             ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
 
         // Center the cube between the handles
