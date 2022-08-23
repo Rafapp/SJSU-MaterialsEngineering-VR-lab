@@ -2448,7 +2448,9 @@ MonoBehaviour:
   specimen: {fileID: 2039621291}
   transparentSpecimen: {fileID: 1495189136}
   poissonRatio: -0.45
-  offset: 0.5
+  cubeOffset: 0.75
+  cylinderOffset: 0.75
+  obj: 0
 --- !u!1 &747452478
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,7 +4387,9 @@ MonoBehaviour:
   specimen: {fileID: 929954001}
   transparentSpecimen: {fileID: 1170899777}
   poissonRatio: -0.45
-  offset: 0.75
+  cubeOffset: 0.75
+  cylinderOffset: 0.75
+  obj: 1
 --- !u!1 &1201854025
 GameObject:
   m_ObjectHideFlags: 0
