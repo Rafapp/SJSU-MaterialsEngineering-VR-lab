@@ -258,7 +258,7 @@ public class GraphWindowController : MonoBehaviour
                 int index = i * (int)ratio;
 
                 // Multiplying by 100 the values
-                RenderOriginNumber(position - offset, graph, graph.xValues[index] * 100, xOriginTextAngle, true);
+                RenderOriginNumber(position - offset, graph, graph.xValues[index], xOriginTextAngle, true);
             }
             // If regular graph, use standard numbering
             else
@@ -320,11 +320,13 @@ public class GraphWindowController : MonoBehaviour
         textComponent.fontSize = graph.fontSize;
 
         // If percentage graph, add percentage symbol
-        // Add 2 decimals for X axis
         if (graph.percentageGraph && addPercent)
         {
             textComponent.text += "%";
-            textComponent.text = Math.Round(number, 2).ToString();
+            if(number > .001f)
+                textComponent.text = Math.Round(number, 3).ToString();
+            else
+                textComponent.text = Math.Round(number, 4).ToString();
         }
         // Round to 0 decimals on Y axis
         else textComponent.text = Math.Round(number, 0).ToString();

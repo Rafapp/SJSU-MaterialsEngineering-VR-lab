@@ -25,7 +25,7 @@ public class GraphManager : MonoBehaviour
     }
     private void testGraph()
     {
-        TensileLabManager.Instance.currentSpecimen = TensileLabManager.SpecimenType.Metal;
+        TensileLabManager.Instance.currentSpecimen = TensileLabManager.SpecimenType.Ceramic;
         RenderGraph();
     }
     private void OnEnable()

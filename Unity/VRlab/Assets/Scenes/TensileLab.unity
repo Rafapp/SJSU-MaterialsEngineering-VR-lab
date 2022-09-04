@@ -20638,6 +20638,10 @@ PrefabInstance:
       value: SingleMaterialGraph
       objectReference: {fileID: 0}
     - target: {fileID: 5784011628103323182, guid: b616219f6e95f744983c09d8fd439f4e, type: 3}
+      propertyPath: graphs.Array.data[2].fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784011628103323182, guid: b616219f6e95f744983c09d8fd439f4e, type: 3}
       propertyPath: graphs.Array.data[0].percentageGraph
       value: 1
       objectReference: {fileID: 0}

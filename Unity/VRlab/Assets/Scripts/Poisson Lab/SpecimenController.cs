@@ -20,7 +20,7 @@ public class SpecimenController : MonoBehaviour
     [SerializeField]
     private ObjectType obj;
 
-    private float initialDistance;
+    public float initialDistance;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class SpecimenController : MonoBehaviour
     }
     private void Update()
     {
-        //Note: This is intensive, must only happen when grabbing both handles
+        //Note: This is intensive, must only happen when grabbing both handles, must add logic with VR handles
 
         if (obj == ObjectType.Cube)
         {
@@ -60,20 +60,20 @@ public class SpecimenController : MonoBehaviour
             specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
             transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
         }
-        else if (obj == ObjectType.Cylinder) {
+        else if (obj == ObjectType.Cylinder)
+        {
             // Elongate or compress the shape using the handles, center shape
             specimen.transform.localScale = new Vector3(specimen.transform.localScale.y * poissonRatio + cylinderOffset,
-                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z))/2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
+                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)) / 2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
 
             // Center the cylinder between the handles
             specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
             transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
         }
-
     }
-    public float getValue()
+
+    public float GetCompressionValue()
     {
-        // Return a compression or extension value between -1 and 1
-        return Mathf.Clamp((handle1.position - handle2.position).magnitude - initialDistance, -1f, 1f);
+        return (handle1.position - handle2.position).magnitude - initialDistance;
     }
 }
