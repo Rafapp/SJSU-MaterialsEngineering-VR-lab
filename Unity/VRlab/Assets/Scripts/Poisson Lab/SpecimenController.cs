@@ -57,8 +57,8 @@ public class SpecimenController : MonoBehaviour
                 ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
 
             // Center the cube between the handles
-            specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
-            transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
+            //specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
+            //transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
         }
         else if (obj == ObjectType.Cylinder)
         {
@@ -67,8 +67,8 @@ public class SpecimenController : MonoBehaviour
                 ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)) / 2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
 
             // Center the cylinder between the handles
-            specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
-            transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
+            //specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
+            //transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
         }
     }
 
