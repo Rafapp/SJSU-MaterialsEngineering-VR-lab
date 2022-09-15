@@ -20,7 +20,10 @@ public class SpecimenController : MonoBehaviour
     [SerializeField]
     private ObjectType obj;
 
-    public float initialDistance;
+    private float initialDistance;
+
+    [SerializeField]
+    private float rangeLimitInPercent;
 
     private void Awake()
     {
@@ -48,31 +51,28 @@ public class SpecimenController : MonoBehaviour
     }
     private void Update()
     {
-        //Note: This is intensive, must only happen when grabbing both handles, must add logic with VR handles
-
-        if (obj == ObjectType.Cube)
+        float HandleSeparation = (handle1.position - handle2.position).magnitude;
+        if (HandleSeparation <= initialDistance + (initialDistance * rangeLimitInPercent) &&
+            HandleSeparation >= initialDistance - (initialDistance * rangeLimitInPercent))
         {
-            // Elongate or compress the shape using the handles, center shape
-            specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + cubeOffset, specimen.transform.localScale.z * poissonRatio + cubeOffset,
-                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
+            //Note: This is intensive, must only happen when grabbing both handles, must add logic with VR handles
+            if (obj == ObjectType.Cube)
+            {
 
-            // Center the cube between the handles
-            //specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
-            //transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
-        }
-        else if (obj == ObjectType.Cylinder)
-        {
-            // Elongate or compress the shape using the handles, center shape
-            specimen.transform.localScale = new Vector3(specimen.transform.localScale.y * poissonRatio + cylinderOffset,
-                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)) / 2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
-
-            // Center the cylinder between the handles
-            //specimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
-            //transparentSpecimen.transform.localPosition = (handle1.localPosition + handle2.localPosition) * 0.5f;
+                // Elongate or compress the shape using the handles, center shape
+                specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + cubeOffset, specimen.transform.localScale.z * poissonRatio + cubeOffset,
+                    (HandleSeparation - (handle1.transform.localScale.z)));
+            }
+            else if (obj == ObjectType.Cylinder)
+            {
+                // Elongate or compress the shape using the handles, center shape
+                specimen.transform.localScale = new Vector3(specimen.transform.localScale.y * poissonRatio + cylinderOffset,
+                    (HandleSeparation - (handle1.transform.localScale.z)) / 2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
+            }
         }
     }
 
-    public float GetCompressionValue()
+    public float GetHandleValue()
     {
         return (handle1.position - handle2.position).magnitude - initialDistance;
     }

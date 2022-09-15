@@ -11,15 +11,32 @@ public class PoissonStationController : MonoBehaviour
     [SerializeField]
     private GameObject Cube, Cylinder;
 
+    [SerializeField]
+    private GameObject CubeMesh, CylinderMesh;
+
+    private Vector3 lastSizeCube, lastSizeCylinder;
+
     private SpecimenController CubeScript, CylinderScript;
     private void Awake()
     {
+        lastSizeCube = Cube.transform.localScale;
+        lastSizeCylinder = Cylinder.transform.localScale;
+
         CubeScript = Cube.GetComponent<SpecimenController>();
         CylinderScript = Cylinder.GetComponent<SpecimenController>();
     }
     private void Update()
     {
-        SetSlider(CubeScript.GetCompressionValue());
+        if (CubeMesh.transform.localScale != lastSizeCube) {
+            lastSizeCube = CubeMesh.transform.localScale;
+            
+            SetSlider(CubeScript.GetHandleValue());
+        }
+        else if(CylinderMesh.transform.localScale != lastSizeCylinder)
+        {
+            lastSizeCylinder = CylinderMesh.transform.localScale;
+            SetSlider(CylinderScript.GetHandleValue());
+        }
     }
 
     private void SetSlider(float value)
