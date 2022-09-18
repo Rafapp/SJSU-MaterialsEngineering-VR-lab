@@ -53,7 +53,7 @@ public class PoissonQuizManager : MonoBehaviour
             }
 
             // .45 Poisson ratio, must be bigger than dotted
-            if (solidSquaresRects[1].sizeDelta.x > dottedSquares[1].sizeDelta.x)
+            if (solidSquaresRects[2].sizeDelta.x > dottedSquares[2].sizeDelta.x)
             {
                 SetGreen(solidSquaresImg[2]);
             }

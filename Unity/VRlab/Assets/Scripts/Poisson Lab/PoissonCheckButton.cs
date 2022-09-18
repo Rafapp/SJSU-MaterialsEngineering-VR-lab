@@ -10,12 +10,7 @@ public class PoissonCheckButton : MonoBehaviour
         if (other.gameObject.tag == "Hand")
         {
             PoissonQuizManager.Instance.CheckSolutions();
-            GetComponent<Animation>().Play();
+            GetComponent<Animator>().SetTrigger("button");
         }
-    }
-    [ContextMenu("test click")]
-    private void click() {
-        PoissonQuizManager.Instance.CheckSolutions();
-        GetComponent<Animation>().Play();
     }
 }
