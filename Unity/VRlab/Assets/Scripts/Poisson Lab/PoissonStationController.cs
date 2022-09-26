@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class PoissonStationController : MonoBehaviour
 {
@@ -31,12 +33,15 @@ public class PoissonStationController : MonoBehaviour
             lastSizeCube = CubeMesh.transform.localScale;
             
             SetSlider(CubeScript.GetHandleValue());
+
+            
         }
         else if(CylinderMesh.transform.localScale != lastSizeCylinder)
         {
             lastSizeCylinder = CylinderMesh.transform.localScale;
             SetSlider(CylinderScript.GetHandleValue());
         }
+        
     }
 
     private void SetSlider(float value)

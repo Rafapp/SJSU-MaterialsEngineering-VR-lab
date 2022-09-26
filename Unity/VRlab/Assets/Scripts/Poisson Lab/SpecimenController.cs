@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class SpecimenController : MonoBehaviour
 {
@@ -24,6 +26,12 @@ public class SpecimenController : MonoBehaviour
 
     [SerializeField]
     private float rangeLimitInPercent;
+
+    [SerializeField]
+    private TMP_Text pascalText;
+
+    [SerializeField]
+    private LineRenderer rend;
 
     private void Awake()
     {
@@ -55,6 +63,8 @@ public class SpecimenController : MonoBehaviour
         if (HandleSeparation <= initialDistance + (initialDistance * rangeLimitInPercent) &&
             HandleSeparation >= initialDistance - (initialDistance * rangeLimitInPercent))
         {
+            UpdateText();
+
             //Note: This is intensive, must only happen when grabbing both handles, must add logic with VR handles
             if (obj == ObjectType.Cube)
             {
@@ -75,5 +85,15 @@ public class SpecimenController : MonoBehaviour
     public float GetHandleValue()
     {
         return (handle1.position - handle2.position).magnitude - initialDistance;
+    }
+
+    private void UpdateText() {
+        float roundedHandle = (float)Math.Round(GetHandleValue(), 3);
+
+        if (GetHandleValue() > initialDistance)
+            pascalText.text = (-roundedHandle).ToString() + " MPa";
+        else
+            pascalText.text = roundedHandle.ToString() + " MPa";
+
     }
 }
