@@ -41,7 +41,6 @@ public class PoissonStationController : MonoBehaviour
             lastSizeCylinder = CylinderMesh.transform.localScale;
             SetSlider(CylinderScript.GetHandleValue());
         }
-        
     }
 
     private void SetSlider(float value)

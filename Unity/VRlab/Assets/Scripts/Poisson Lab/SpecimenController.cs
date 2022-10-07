@@ -30,9 +30,6 @@ public class SpecimenController : MonoBehaviour
     [SerializeField]
     private TMP_Text pascalText;
 
-    [SerializeField]
-    private LineRenderer rend;
-
     private void Awake()
     {
         transparentOffset = new Vector3(.01f, .01f, .01f);
