@@ -17,12 +17,12 @@ public class SpecimenController : MonoBehaviour
     [SerializeField]
     private float poissonRatio, cubeOffset, cylinderOffset;
 
-    private Vector3 transparentOffset;
+    private Vector3 transparentOffset, initialCube, initialCylinder;
 
     [SerializeField]
     private ObjectType obj;
 
-    private float initialDistance;
+    private float initialHandleDistance;
 
     [SerializeField]
     private float rangeLimitInPercent;
@@ -32,23 +32,24 @@ public class SpecimenController : MonoBehaviour
 
     private void Awake()
     {
+        // We slightly increase the transparent shape for some offset
         transparentOffset = new Vector3(.01f, .01f, .01f);
 
-        initialDistance = (handle1.position - handle2.position).magnitude;
+        // Initial handle distance
+        initialHandleDistance = GetHandleValue();
 
         if (obj == ObjectType.Cube)
         {
-            // Elongate or compress the shape using the handles, center shape
-            specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + cubeOffset, specimen.transform.localScale.z * poissonRatio + cubeOffset,
-                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
+            // Initial cube dimensions
+            initialCube = specimen.transform.localScale;
 
             // Update the transparent shape to match
             transparentSpecimen.transform.localScale = specimen.transform.localScale + transparentOffset;
         }
         if (obj == ObjectType.Cylinder) {
-            // Elongate or compress the shape using the handles, center shape
-            specimen.transform.localScale = new Vector3(specimen.transform.localScale.y * poissonRatio + cylinderOffset,
-                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)) / 2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
+
+            // Initial cylinder dimensions
+            initialCylinder = specimen.transform.localScale;
 
             // Update the transparent shape to match
             transparentSpecimen.transform.localScale = specimen.transform.localScale + transparentOffset;
@@ -56,38 +57,39 @@ public class SpecimenController : MonoBehaviour
     }
     private void Update()
     {
-        float HandleSeparation = (handle1.position - handle2.position).magnitude;
-        if (HandleSeparation <= initialDistance + (initialDistance * rangeLimitInPercent) &&
-            HandleSeparation >= initialDistance - (initialDistance * rangeLimitInPercent))
+        // S = <handle * poisson * initialX, handle * poisson * initialY, handle>
+        float handleSeparation = (handle1.position - handle2.position).magnitude;
+
+        if (handleSeparation <= initialHandleDistance + (initialHandleDistance * rangeLimitInPercent) &&
+            handleSeparation >= initialHandleDistance - (initialHandleDistance * rangeLimitInPercent))
         {
             UpdateText();
+            Vector3 scale = specimen.transform.localScale;
 
             //Note: This is intensive, must only happen when grabbing both handles, must add logic with VR handles
             if (obj == ObjectType.Cube)
             {
-
                 // Elongate or compress the shape using the handles, center shape
-                specimen.transform.localScale = new Vector3(specimen.transform.localScale.z * poissonRatio + cubeOffset, specimen.transform.localScale.z * poissonRatio + cubeOffset,
-                    (HandleSeparation - (handle1.transform.localScale.z)));
+                specimen.transform.localScale = new Vector3((specimen.transform.localScale.z * poissonRatio) + initialCube.x, specimen.transform.localScale.z * poissonRatio + initialCube.y,
+                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
             }
             else if (obj == ObjectType.Cylinder)
             {
                 // Elongate or compress the shape using the handles, center shape
-                specimen.transform.localScale = new Vector3(specimen.transform.localScale.y * poissonRatio + cylinderOffset,
-                    (HandleSeparation - (handle1.transform.localScale.z)) / 2, specimen.transform.localScale.y * poissonRatio + cylinderOffset);
+                //specimen.transform.localScale = new Vector3();
             }
         }
     }
 
     public float GetHandleValue()
     {
-        return (handle1.position - handle2.position).magnitude - initialDistance;
+        return (handle1.position - handle2.position).magnitude - initialHandleDistance;
     }
 
     private void UpdateText() {
         float roundedHandle = (float)Math.Round(GetHandleValue(), 3);
 
-        if (GetHandleValue() > initialDistance)
+        if (GetHandleValue() > initialHandleDistance)
             pascalText.text = (-roundedHandle).ToString() + " MPa";
         else
             pascalText.text = roundedHandle.ToString() + " MPa";
