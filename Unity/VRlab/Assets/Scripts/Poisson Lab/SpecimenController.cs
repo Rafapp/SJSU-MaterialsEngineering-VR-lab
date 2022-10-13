@@ -44,7 +44,7 @@ public class SpecimenController : MonoBehaviour
             initialCube = specimen.transform.localScale;
 
             // Update the transparent shape to match
-            transparentSpecimen.transform.localScale = specimen.transform.localScale + transparentOffset;
+            transparentSpecimen.transform.localScale = initialCube + transparentOffset;
         }
         if (obj == ObjectType.Cylinder) {
 
@@ -52,7 +52,7 @@ public class SpecimenController : MonoBehaviour
             initialCylinder = specimen.transform.localScale;
 
             // Update the transparent shape to match
-            transparentSpecimen.transform.localScale = specimen.transform.localScale + transparentOffset;
+            transparentSpecimen.transform.localScale = initialCylinder + transparentOffset;
         }
     }
     private void Update()
@@ -70,8 +70,7 @@ public class SpecimenController : MonoBehaviour
             if (obj == ObjectType.Cube)
             {
                 // Elongate or compress the shape using the handles, center shape
-                specimen.transform.localScale = new Vector3((specimen.transform.localScale.z * poissonRatio) + initialCube.x, specimen.transform.localScale.z * poissonRatio + initialCube.y,
-                ((handle1.position - handle2.position).magnitude - (handle1.transform.localScale.z)));
+                specimen.transform.localScale = new Vector3((poissonRatio * scale.z) + cubeOffset, (poissonRatio * scale.z) + cubeOffset, handleSeparation);
             }
             else if (obj == ObjectType.Cylinder)
             {

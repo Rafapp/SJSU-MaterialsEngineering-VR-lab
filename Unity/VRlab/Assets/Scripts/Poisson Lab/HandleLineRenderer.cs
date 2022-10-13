@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class HandleLineRenderer : MonoBehaviour
 {
+    enum handleType { left, right, quiz}
+
     [SerializeField]
-    private Transform specimenTransform;
+    private GameObject specimen;
+
+    [SerializeField]
+    private handleType type;
 
     private LineRenderer rend;
 
@@ -17,6 +22,20 @@ public class HandleLineRenderer : MonoBehaviour
     private void Update()
     {
         rend.SetPosition(0, transform.position);
-        rend.SetPosition(1, specimenTransform.position);
+        if (type == handleType.left)
+        {
+            Vector3 point = new Vector3(specimen.transform.position.x, specimen.transform.position.y, specimen.transform.position.z + (specimen.transform.localScale.z / 2));
+            rend.SetPosition(1, point);
+        }
+        else if (type == handleType.right)
+        {
+            Vector3 point = new Vector3(specimen.transform.position.x, specimen.transform.position.y, specimen.transform.position.z - (specimen.transform.localScale.z / 2));
+            rend.SetPosition(1, point);
+        }
+        else if (type == handleType.quiz)
+        {
+            rend.SetPosition(1, transform.position);
+        }
+        
     }
 }
