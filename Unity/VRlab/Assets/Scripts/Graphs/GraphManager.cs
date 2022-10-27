@@ -21,11 +21,11 @@ public class GraphManager : MonoBehaviour
         ceramicGraphController = ceramicGraph.GetComponentInChildren<GraphWindowController>();
         allGraphController = allGraph.GetComponentInChildren<GraphWindowController>();
 
-        //testGraph();
+        testGraph();
     }
     private void testGraph()
     {
-        TensileLabManager.Instance.currentSpecimen = TensileLabManager.SpecimenType.Ceramic;
+        TensileLabManager.Instance.currentSpecimen = TensileLabManager.SpecimenType.Metal;
         RenderGraph();
     }
     private void OnEnable()

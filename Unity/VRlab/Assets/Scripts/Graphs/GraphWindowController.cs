@@ -322,11 +322,11 @@ public class GraphWindowController : MonoBehaviour
         // If percentage graph, add percentage symbol
         if (graph.percentageGraph && addPercent)
         {
-            textComponent.text += "%";
             if(number > .001f)
-                textComponent.text = Math.Round(number, 3).ToString();
+                textComponent.text = (Math.Round(number, 3) * 100).ToString();
             else
-                textComponent.text = Math.Round(number, 4).ToString();
+                textComponent.text = (Math.Round(number, 4) * 100).ToString();
+            textComponent.text += "%";
         }
         // Round to 0 decimals on Y axis
         else textComponent.text = Math.Round(number, 0).ToString();

@@ -32,7 +32,7 @@ public class WhiteboardController : MonoBehaviour
         textureWidth = textureClone.width;
         textureHeight = textureClone.height;
 
-        penColor = Enumerable.Repeat<Color32>(new Color32(0, 0, 0, 255),
+        penColor = Enumerable.Repeat<Color32>(new Color32(255, 255, 255, 255),
             strokeWidth * strokeHeight).ToArray<Color32>();
     }
     public void ResetWhiteboard()
