@@ -16,8 +16,8 @@ public class WhiteboardController : MonoBehaviour
 
     private Color32[] penColor;
 
-    [Range(0, 1)]
-    public float lerp = 0.05f;
+    [Range(0,1)]
+    public float lerp;
 
     private void Start()
     {
@@ -53,8 +53,8 @@ public class WhiteboardController : MonoBehaviour
                 int lerpCount = (int)(1 / lerp);
                 for (int i = 0; i <= lerpCount; i++)
                 {
-                    int xVal = (int)Mathf.Lerp((float)lastPaintX, (float)texturePosX, lerp);
-                    int yVal = (int)Mathf.Lerp((float)lastPaintY, (float)texturePosY, lerp);
+                    int xVal = (int)Mathf.Lerp((float)lastPaintX, (float)texturePosX, lerp * Time.deltaTime);
+                    int yVal = (int)Mathf.Lerp((float)lastPaintY, (float)texturePosY, lerp * Time.deltaTime);
                     textureClone.SetPixels32(xVal, yVal, strokeWidth, strokeHeight, penColor);
                 }
             }

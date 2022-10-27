@@ -734,7 +734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127710095}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.25, y: -0.95, z: 0}
+  m_LocalPosition: {x: 0.061, y: -0.95, z: 0}
   m_LocalScale: {x: 0.03, y: 0.10000002, z: 0.03}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   lastPaintX: 0
   lastPaintY: 0
   emptyWhiteboard: {fileID: 2800000, guid: fded808904e0a2442ab1e5a7d8b95c98, type: 3}
-  lerp: 0.1
+  lerp: 1
 --- !u!64 &150657403
 MeshCollider:
   m_ObjectHideFlags: 0
