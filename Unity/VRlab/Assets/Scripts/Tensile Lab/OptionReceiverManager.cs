@@ -68,8 +68,6 @@ public class OptionReceiverManager : MonoBehaviour
                 return;
                 
         }
-        // All solutions are correct, so we switch arrows back to the specimen
-        ArrowManager.Instance.SwitchArrows();
     }
     private void OnDestroy()
     {
