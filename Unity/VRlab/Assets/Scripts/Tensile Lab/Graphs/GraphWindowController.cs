@@ -254,11 +254,15 @@ public class GraphWindowController : MonoBehaviour
                 RenderOriginNumber(position - offset, graph, (graph.xValues[index] *100)/Mathf.Max(graph.xValues), xOriginTextAngle, true);
                 */
 
-                float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
-                int index = i * (int)ratio;
+                //float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
+                //int index = i * (int)ratio;
 
                 // Multiplying by 100 the values
-                RenderOriginNumber(position - offset, graph, graph.xValues[index], xOriginTextAngle, true);
+                //RenderOriginNumber(position - offset, graph, graph.xValues[index], xOriginTextAngle, true);
+
+                // Render in increments of 10%
+                RenderOriginNumber(position - offset, graph, i, xOriginTextAngle, true);
+
             }
             // If regular graph, use standard numbering
             else
@@ -322,10 +326,7 @@ public class GraphWindowController : MonoBehaviour
         // If percentage graph, add percentage symbol
         if (graph.percentageGraph && addPercent)
         {
-            if(number > .001f)
-                textComponent.text = (Math.Round(number, 3) * 100).ToString();
-            else
-                textComponent.text = (Math.Round(number, 4) * 100).ToString();
+            textComponent.text = (number * 10).ToString();
             textComponent.text += "%";
         }
         // Round to 0 decimals on Y axis

@@ -34,7 +34,7 @@ public class HandleLineRenderer : MonoBehaviour
         }
         else if (type == handleType.quiz)
         {
-            rend.SetPosition(1, transform.position);
+            rend.SetPosition(1, specimen.transform.position);
         }
         
     }
