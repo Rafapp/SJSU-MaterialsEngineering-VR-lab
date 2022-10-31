@@ -6,7 +6,7 @@ using System;
 public class ConfirmButton : MonoBehaviour
 {
     [SerializeField]
-    private Animator leverAnimator;
+    private Animator buttonAnimator;
 
     public static event Action confirmButtonEvent;
 
@@ -14,7 +14,7 @@ public class ConfirmButton : MonoBehaviour
     {
         if (other.gameObject.tag == "Hand")
         {
-            leverAnimator.SetTrigger("buttonAnim");
+            buttonAnimator.SetTrigger("buttonAnim");
             confirmButtonEvent?.Invoke();
         }
     }

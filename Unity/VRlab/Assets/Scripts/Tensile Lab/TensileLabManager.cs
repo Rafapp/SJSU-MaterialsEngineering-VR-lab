@@ -12,6 +12,7 @@ public class TensileLabManager : MonoBehaviour
         Metal, Ceramic, Polymer, Null
     }
     // 0 metal, 1 polymer, 2 ceramic, 3 null
+
     public int specimenId;
 
     public static TensileLabManager Instance;

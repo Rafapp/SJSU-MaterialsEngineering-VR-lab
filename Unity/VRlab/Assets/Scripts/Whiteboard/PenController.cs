@@ -17,6 +17,7 @@ public class PenController : MonoBehaviour
     {
         // CPU intensive, might need fix in the future
         Ray r = new Ray(gameObject.transform.position , new Vector3(-1, 0, 0));
+        Debug.DrawRay(gameObject.transform.position, new Vector3(-1, 0, 0) * rayLength, Color.green, .1f);
         if (Physics.Raycast(r, out hit, rayLength))
         {
             if (hit.collider.name == "Whiteboard")
