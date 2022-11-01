@@ -1,6 +1,7 @@
 # SJSU VR lab
 Experiential Learning of Engineering Concepts in Virtual Learning Environments (VLEs)
-https://media-exp1.licdn.com/dms/image/D562DAQG6gBQ5bt-psw/profile-treasury-image-shrink_1920_1920/0/1665979014018?e=1667948400&v=beta&t=tD5pHF4MV5xHkFHii6szzqFGF30HL0WtCJBqUDQFkO0![image](https://user-images.githubusercontent.com/38381290/199352188-bce78480-84df-44c0-a542-d9261782259d.png)
+![VRlab 95f9c992f155785c9f94](https://user-images.githubusercontent.com/38381290/199352505-c72681df-b7b1-4a67-8700-f613e88a4b90.gif)
+
 
 ## Introduction
 CVRLabSJSU allows students to simulate tensile testing of specimen materials, interactive diagrams demonstrating Poisson's ratio, and provides a way to quiz them based on the lab experimentations.
