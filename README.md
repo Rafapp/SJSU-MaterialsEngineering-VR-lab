@@ -17,7 +17,7 @@ Ozgur Keles, Ph.D
 ### Technical Lead
 Rafael Padilla Perez
 
-This project is a new repository based on the CVRLabSJSU project by Vincent Brubaker-Gianakos https://github.com/Apelsin/CVRLabSJSU, which is a fork from the CVRLabSJSU project by Ian Hunter, which is in turn a fork of the SBHacks project by Connor Smith, Anish Kannan, and Kristin Agcaoili.
+This project is a new repository. which includes some 3D meshes from CVRLabSJSU project by Vincent Brubaker-Gianakos https://github.com/Apelsin/CVRLabSJSU, which is a fork from the CVRLabSJSU project by Ian Hunter, which is in turn a fork of the SBHacks project by Connor Smith, Anish Kannan, and Kristin Agcaoili.
 
 Hand models and rig provided under creative commons 4.0 license: https://developer.oculus.com/licenses/creative-commons-4.0
 
