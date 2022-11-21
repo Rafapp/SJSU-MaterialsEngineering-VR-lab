@@ -75,7 +75,7 @@ public class SpecimenController : MonoBehaviour
             else if (obj == ObjectType.Cylinder)
             {
                 // Elongate or compress the shape using the handles, center shape
-                //specimen.transform.localScale = new Vector3();
+                specimen.transform.localScale = new Vector3((poissonRatio * scale.y) + cylinderOffset, handleSeparation/2, (poissonRatio * scale.y) + cylinderOffset); ;
             }
         }
     }

@@ -776,7 +776,7 @@ MonoBehaviour:
   transparentSpecimen: {fileID: 1475915780}
   poissonRatio: -0.45
   cubeOffset: 0.75
-  cylinderOffset: 0.6
+  cylinderOffset: 0.6125
   obj: 0
   rangeLimitInPercent: 0.35
   pascalText: {fileID: 952395689}
@@ -3949,7 +3949,7 @@ MonoBehaviour:
   transparentSpecimen: {fileID: 1495189136}
   poissonRatio: 0
   cubeOffset: 0.75
-  cylinderOffset: 0.6
+  cylinderOffset: 0.5
   obj: 0
   rangeLimitInPercent: 0.35
   pascalText: {fileID: 47943172}
@@ -11605,7 +11605,7 @@ MonoBehaviour:
   transparentSpecimen: {fileID: 1969300521}
   poissonRatio: -0.2
   cubeOffset: 0.75
-  cylinderOffset: 0.6
+  cylinderOffset: 0.55
   obj: 0
   rangeLimitInPercent: 0.35
   pascalText: {fileID: 213383961}

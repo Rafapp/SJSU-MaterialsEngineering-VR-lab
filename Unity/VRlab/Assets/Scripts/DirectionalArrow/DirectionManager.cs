@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DirectionManager : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class DirectionManager : MonoBehaviour
     [SerializeField]
     private string[] prompts;
 
+    [SerializeField]
+    private TMP_Text text;
+
     private int currentPrompt;
 
     private void Awake()
     {
         currentPrompt = 0;
+        direction = colliders[currentPrompt].transform;
+        text.text = prompts[currentPrompt];
     }
 
     private void Update()
@@ -28,11 +34,13 @@ public class DirectionManager : MonoBehaviour
         DirectionSystem.transform.LookAt(direction);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         // Update question
-        if (collision.gameObject.name == currentPrompt.ToString()) {
+        if (other.gameObject.name == currentPrompt.ToString()) {
             currentPrompt++;
+            direction = colliders[currentPrompt].transform;
+            text.text = prompts[currentPrompt];
         }
     }
 }
