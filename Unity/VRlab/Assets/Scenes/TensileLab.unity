@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.25
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 6abe918ee1229b34f8557fc2a5a39825, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d04fa9ef91692c6429efccdf42970c46, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38866946, g: 0.7278261, b: 0.7334365, a: 1}
+  m_IndirectSpecularColor: {r: 0.35727137, g: 0.69660014, b: 0.72406316, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15830,12 +15830,12 @@ GameObject:
   - component: {fileID: 2115239406}
   - component: {fileID: 2115239405}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasSpartanHelmets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2115239404
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16006,6 +16006,10 @@ MonoBehaviour:
   - {fileID: 1387438840}
   - {fileID: 33994679}
   - {fileID: 590814813}
+  optionReceivers:
+  - {fileID: 212932383}
+  - {fileID: 771800995}
+  - {fileID: 1014622839}
   optionText:
   - "\u03C3F"
   - "\u03C3Y"

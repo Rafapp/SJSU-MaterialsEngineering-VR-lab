@@ -26,6 +26,16 @@ public class PullLever : MonoBehaviour
             Invoke("ResetWait", 5);
         }
     }
+    [ContextMenu("TestPullLever")]
+    private void TestPullLever() {
+        if (waiting == false)
+        {
+            waiting = true;
+            leverAnimator.SetTrigger("leverAnim");
+            pulledLeverEvent?.Invoke();
+            Invoke("ResetWait", 5);
+        }
+    }
 
     // Add wait time so that we don't collide with the handle after pulling once
     private void ResetWait() { waiting = false; }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class OptionManager : MonoBehaviour
 {
@@ -9,12 +10,13 @@ public class OptionManager : MonoBehaviour
     private Transform[] initialPositions;
 
     [SerializeField]
-    private GameObject[] optionObjects;
+    private GameObject[] optionObjects, optionReceivers;
 
     private Option[] optionScripts;
 
     [SerializeField]
     private string[] optionText;
+
 
     private void Awake()
     {
@@ -31,12 +33,18 @@ public class OptionManager : MonoBehaviour
             optionScripts[i] = optionObjects[i].GetComponent<Option>();
         }
     }
+    [ContextMenu("Reset")]
     private void ResetOptions() {
-        
+        if (TensileLabManager.Instance.currentQuestion > 1) {
+            for (int i = 0; i < optionReceivers.Length; i++)
+            {
+                XRSocketInteractor interactor = optionReceivers[i].GetComponent<XRSocketInteractor>();
+                interactor.socketActive = false;
+            }
+        }
+
         for (int i = 0; i < optionObjects.Length; i++)
         {
-            optionObjects[i].transform.parent = null;
-
             optionObjects[i].transform.position = initialPositions[i].position;
             optionObjects[i].transform.rotation = initialPositions[i].rotation;
 
@@ -44,7 +52,19 @@ public class OptionManager : MonoBehaviour
             optionScripts[i].optionMaterial.color = new Color32(0, 255, 255, 255);
             optionScripts[i].optionMaterial.color = new Color32(0, 255, 255, 255);
         }
+        Invoke("ResetSockets", 1);
+
+        
     }
+
+    private void ResetSockets() {
+        for (int i = 0; i < optionReceivers.Length; i++)
+        {
+            XRSocketInteractor interactor = optionReceivers[i].GetComponent<XRSocketInteractor>();
+            interactor.socketActive = true;
+        }
+    }
+
     private void OnDisable()
     {
         TensileLabManager.questionChange -= ResetOptions;
