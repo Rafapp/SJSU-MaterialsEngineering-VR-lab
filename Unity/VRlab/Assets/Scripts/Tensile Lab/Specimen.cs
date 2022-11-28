@@ -9,6 +9,7 @@ public class Specimen : MonoBehaviour
     public MeshRenderer meshRenderer;
     public GameObject brokenChild;
     public Material FracturedMaterial;
+    public Animator brokenAnimator;
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -18,6 +19,8 @@ public class Specimen : MonoBehaviour
     {
         meshRenderer.enabled = false;
         brokenChild.SetActive(true);
+        if(brokenAnimator)
+            brokenAnimator.SetTrigger("break");
     }
     public void ConnectSpecimen()
     {
