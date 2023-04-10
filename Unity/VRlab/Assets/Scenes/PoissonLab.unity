@@ -3814,6 +3814,14 @@ MonoBehaviour:
   - {fileID: 453509000}
   - {fileID: 782223466}
   - {fileID: 64258402}
+  completeTxtSquares:
+  - {fileID: 1285063336}
+  - {fileID: 1500470820}
+  - {fileID: 1083315161}
+  completeTxtCircles:
+  - {fileID: 997825810}
+  - {fileID: 1682293089}
+  - {fileID: 985138030}
 --- !u!1 &637954941
 GameObject:
   m_ObjectHideFlags: 0
@@ -7422,7 +7430,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.250425, y: -0.750075}
-  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1080525453
 MonoBehaviour:
@@ -8940,7 +8948,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285063334}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10840,7 +10848,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.7502751, y: -0.750075}
-  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656534865
 MonoBehaviour:

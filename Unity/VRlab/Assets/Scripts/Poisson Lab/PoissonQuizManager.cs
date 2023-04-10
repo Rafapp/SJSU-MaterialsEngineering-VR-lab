@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PoissonQuizManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PoissonQuizManager : MonoBehaviour
         else Instance = this;
     }
 
-        [SerializeField]
+    [SerializeField]
     private GameObject checkButton;
 
     [SerializeField]
@@ -25,17 +26,20 @@ public class PoissonQuizManager : MonoBehaviour
     [SerializeField]
     private RectTransform[] dottedSquares, dottedCircles;
 
+    [SerializeField]
+    private TMP_Text[] completeTxtSquares, completeTxtCircles;
+
     [ContextMenu("Check solutions test")]
     public void CheckSolutions()
     {
         // Check all squares (compressed, expansion)
-        for (int i = 0; i < solidSquaresRects.Length; i++)
-        {
+        for (int i = 0; i < solidSquaresRects.Length; i++) { 
             // 0 Poisson ratio, must be within .1 of size
             if (solidSquaresRects[0].sizeDelta.x < dottedSquares[0].sizeDelta.x + .1f &&
                 solidSquaresRects[0].sizeDelta.x > dottedSquares[0].sizeDelta.x - .1f)
             {
                 SetGreen(solidSquaresImg[0]);
+                completeTxtSquares[0].text = "Complete!"; 
             }
             else
             {
@@ -46,6 +50,7 @@ public class PoissonQuizManager : MonoBehaviour
             if (solidSquaresRects[1].sizeDelta.x > dottedSquares[1].sizeDelta.x)
             {
                 SetGreen(solidSquaresImg[1]);
+                completeTxtSquares[1].text = "Complete!";
             }
             else
             {
@@ -56,6 +61,7 @@ public class PoissonQuizManager : MonoBehaviour
             if (solidSquaresRects[2].sizeDelta.x > dottedSquares[2].sizeDelta.x)
             {
                 SetGreen(solidSquaresImg[2]);
+                completeTxtSquares[2].text = "Complete!";
             }
             else
             {
@@ -71,6 +77,7 @@ public class PoissonQuizManager : MonoBehaviour
                 solidCirclesRects[0].sizeDelta.x > dottedCircles[0].sizeDelta.x - .1f)
             {
                 SetGreen(solidCirclesImg[0]);
+                completeTxtCircles[0].text = "Complete!";
             }
             else
             {
@@ -81,6 +88,7 @@ public class PoissonQuizManager : MonoBehaviour
             if (solidCirclesRects[1].sizeDelta.x < dottedCircles[1].sizeDelta.x)
             {
                 SetGreen(solidCirclesImg[1]);
+                completeTxtCircles[1].text = "Complete!";
             }
             else
             {
@@ -91,6 +99,7 @@ public class PoissonQuizManager : MonoBehaviour
             if (solidCirclesRects[2].sizeDelta.x < dottedCircles[2].sizeDelta.x)
             {
                 SetGreen(solidCirclesImg[2]);
+                completeTxtCircles[2].text = "Complete!";
             }
             else
             {

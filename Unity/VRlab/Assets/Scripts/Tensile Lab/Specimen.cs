@@ -10,8 +10,14 @@ public class Specimen : MonoBehaviour
     public GameObject brokenChild;
     public Material FracturedMaterial;
     public Animator brokenAnimator;
+    private Vector3 initialPos;
+    private Quaternion initialRot;
+
     private void Start()
     {
+        initialPos = transform.position;
+        initialRot = transform.rotation;
+        print("init:" + initialRot);
         meshRenderer = GetComponent<MeshRenderer>();
         brokenChild.SetActive(false);
     }
@@ -28,5 +34,14 @@ public class Specimen : MonoBehaviour
         meshRenderer.enabled = true;
         meshRenderer.material = FracturedMaterial;
         brokenChild.SetActive(false);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        // If we drop specimen, reset to table
+        if (collision.gameObject.CompareTag("floor")) {
+            transform.position = initialPos;
+            transform.rotation = initialRot;
+            print("final:" + transform.rotation);
+        }
     }
 }

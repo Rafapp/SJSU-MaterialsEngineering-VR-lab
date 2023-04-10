@@ -94,7 +94,7 @@ public class GraphWindowController : MonoBehaviour
         graphs[2].yValues = yDataCeramic.Select(d => (float)d).ToArray();
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
-        //RenderGraph(graphs[2]);
+        RenderGraph(2, true);
     }
     public void RenderGraph(int index, bool renderNumbers)
     {
@@ -245,30 +245,16 @@ public class GraphWindowController : MonoBehaviour
             // If percentage graph, draw as a percent
             if (graph.percentageGraph)
             {
-                /* OLD MATH
-                 * 
-                float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
-                int index = i * (int)ratio;
-                print(index);
-                //print((graph.xValues[index] * 100) / Mathf.Max(graph.xValues));
-                RenderOriginNumber(position - offset, graph, (graph.xValues[index] *100)/Mathf.Max(graph.xValues), xOriginTextAngle, true);
-                */
-
-                //float ratio = MathF.Floor(graph.xValues.Length / graph.xSubdivisions);
-                //int index = i * (int)ratio;
-
-                // Multiplying by 100 the values
-                //RenderOriginNumber(position - offset, graph, graph.xValues[index], xOriginTextAngle, true);
-
                 // Render in increments of 10%
-                RenderOriginNumber(position - offset, graph, i, xOriginTextAngle, true);
+                numberFractionX = graph.xValues[i] * 1000f;
+                RenderOriginNumber(position - offset, graph, numberFractionX, xOriginTextAngle, true);
 
             }
             // If regular graph, use standard numbering
             else
             {
-                numberFractionX = Mathf.Max(graph.xValues) / graph.xSubdivisions;
-                RenderOriginNumber(position - offset, graph, numberFractionX * i, xOriginTextAngle, true);
+                numberFractionX = graph.xValues[i] * 1000f;
+                RenderOriginNumber(position - offset, graph, numberFractionX, xOriginTextAngle, true);
             }
         }
 
@@ -326,7 +312,7 @@ public class GraphWindowController : MonoBehaviour
         // If percentage graph, add percentage symbol
         if (graph.percentageGraph && addPercent)
         {
-            textComponent.text = (number * 10).ToString();
+            textComponent.text = (number * 10).ToString("F2");
             textComponent.text += "%";
         }
         // Round to 0 decimals on Y axis
