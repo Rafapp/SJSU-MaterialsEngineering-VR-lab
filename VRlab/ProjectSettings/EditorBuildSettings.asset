@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f8c5b44fa08bc7a4eb68dd38c5682072
+  - enabled: 1
+    path: Assets/Scenes/Not Embodied (A)/TensileLabA.unity
+    guid: 95afd42da65a3447cac9d6e1112068df
+  - enabled: 1
+    path: Assets/Scenes/Not Embodied (A)/PoissonLabA.unity
+    guid: 5fd3ceaf2c96a43c8b60cf6765e9acb9
+  - enabled: 1
+    path: Assets/Scenes/Embodied (B)/TensileLabB.unity
+    guid: d5bdbb0f8d11e904da1fac3d0e8a6d75
+  - enabled: 1
+    path: Assets/Scenes/Embodied (B)/PoissonLabB.unity
+    guid: d37970390485b684bbd3ed2448798830
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1cf43cf8898bb7e46ad94ff7e6da3e12, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 99e53048e079dbd45a8b3315f1c2f56f, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 053992de41088a3429d7b4cdb25484e2, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 93454bba663e528489e7ccc3566b9d71, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 654a79ccae75dec489eac03fe407e258, type: 2}
