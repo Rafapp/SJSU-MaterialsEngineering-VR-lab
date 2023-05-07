@@ -8,10 +8,12 @@ public class StudentIDmanager : MonoBehaviour
     [SerializeField]
     private TMP_Text idText;
     public static StudentIDmanager Instance;
+    private bool canType = true;
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(Instance);
         else Instance = this;
+        clear();
     }
 
     // Add number to the text
@@ -27,6 +29,11 @@ public class StudentIDmanager : MonoBehaviour
         {
             saveID();
         }
+        // 13 is for start
+        else if (number == 13)
+        {
+            TransitionManager.Instance.OnStartPressed();
+        }
         // Numbers 0-9
         else idText.text += number.ToString();
     }
@@ -34,10 +41,12 @@ public class StudentIDmanager : MonoBehaviour
     public void clear()
     {
         idText.text = "";
+        canType = true;
     }
     // Save student ID
     public void saveID()
     {
-        idText.text = "Student ID saved successfully";
+        idText.text = "ID saved";
+        canType = false;
     }
 }

@@ -29,7 +29,6 @@ public class PinpadButton : MonoBehaviour
     {
         StudentIDmanager.Instance.addNumber(buttonNumber);
         StartCoroutine("colorChange");
-        
     }
     IEnumerator colorChange()
     {
