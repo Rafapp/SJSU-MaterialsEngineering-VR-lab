@@ -30,12 +30,12 @@ public class StudentIDmanager : MonoBehaviour
             saveID();
         }
         // 13 is for start
-        else if (number == 13)
+        else if (number == 13 && canType == false)
         {
             TransitionManager.Instance.OnStartPressed();
         }
         // Numbers 0-9
-        else idText.text += number.ToString();
+        else if(canType) idText.text += number.ToString();
     }
     // Clear all numbers
     public void clear()
