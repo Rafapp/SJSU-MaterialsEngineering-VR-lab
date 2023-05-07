@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ResetLabButton : MonoBehaviour
+public class ButtonStation : MonoBehaviour
 {
     private Animator anim;
     private void Awake()
