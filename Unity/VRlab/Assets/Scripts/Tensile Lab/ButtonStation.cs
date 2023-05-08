@@ -5,21 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class ButtonStation : MonoBehaviour
 {
+
+    [SerializeField]
+    private int sceneToLoad;
+
     private Animator anim;
+
     private void Awake()
     {
         anim = this.gameObject.GetComponent<Animator>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Hand")
         {
             anim.SetTrigger("ButtonAnimation");
-            Invoke("ReloadScene", 2f);
+            StartCoroutine(ReloadScene(sceneToLoad));
         }
     }
-    private void ReloadScene()
+
+    IEnumerator ReloadScene(int sceneNumber)
     {
-        SceneManager.LoadScene(0);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(sceneNumber);
     }
 }

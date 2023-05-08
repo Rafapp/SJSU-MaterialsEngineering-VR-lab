@@ -6219,13 +6219,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1957691811}
+  - {fileID: 320070478}
+  - {fileID: 3676332183113179649}
   - {fileID: 543450652667576487}
   - {fileID: 700785725}
   - {fileID: 644899476}
-  - {fileID: 320070478}
   - {fileID: 815169091}
   - {fileID: 726058900}
-  - {fileID: 3676332183113179649}
   m_Father: {fileID: 1657292049}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19177,6 +19177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2664112536228599967, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: sceneToLoad
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8607536009238956301, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
       propertyPath: m_Name
       value: NextLabStation
@@ -19197,6 +19201,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 773562567}
     m_Modifications:
+    - target: {fileID: 1511959983141704636, guid: 61447d17ff3394bdc8903a8cc54e82ce, type: 3}
+      propertyPath: sceneToLoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1511959983579536528, guid: 61447d17ff3394bdc8903a8cc54e82ce, type: 3}
       propertyPath: m_RootOrder
       value: 4

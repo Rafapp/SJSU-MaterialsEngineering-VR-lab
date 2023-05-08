@@ -9102,6 +9102,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8624dc705b584d2d8d44a799806944d, type: 3}
+--- !u!1001 &1275429562
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1657292049}
+    m_Modifications:
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457439331482029023, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_text
+      value: Finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607536009238956301, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      propertyPath: m_Name
+      value: NextLabStation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5147371201696316635, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+--- !u!4 &1275429563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1145777006082075657, guid: 708aabb97932141c98d01276ad3a0f75, type: 3}
+  m_PrefabInstance: {fileID: 1275429562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1279647544
 GameObject:
   m_ObjectHideFlags: 0
@@ -11227,6 +11300,7 @@ Transform:
   - {fileID: 747452479}
   - {fileID: 235018505}
   - {fileID: 1661522437}
+  - {fileID: 1275429563}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11244,7 +11318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511959983579536528, guid: 61447d17ff3394bdc8903a8cc54e82ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1511959983579536528, guid: 61447d17ff3394bdc8903a8cc54e82ce, type: 3}
       propertyPath: m_LocalPosition.y
