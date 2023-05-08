@@ -94,7 +94,7 @@ public class GraphWindowController : MonoBehaviour
         graphs[2].yValues = yDataCeramic.Select(d => (float)d).ToArray();
 
         // --TEST ONLY--TEST ONLY--TEST ONLY--
-        RenderGraph(2, true);
+        //RenderGraph(2, true);
     }
     public void RenderGraph(int index, bool renderNumbers)
     {
