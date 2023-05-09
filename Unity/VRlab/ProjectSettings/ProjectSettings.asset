@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: SJSU Materials Engineering
-  productName: VR Lab 1.0.1_B
+  productName: VR Lab 1.0.1_A
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -133,13 +133,10 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 1.0.4
+  bundleVersion: 1.0.6
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 4725710802370975051, guid: 053992de41088a3429d7b4cdb25484e2, type: 2}
-  - {fileID: 11400000, guid: 1cf43cf8898bb7e46ad94ff7e6da3e12, type: 2}
-  - {fileID: 11400000, guid: 654a79ccae75dec489eac03fe407e258, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -159,7 +156,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.SJSUMaterialsEngineering.VRLab
+    Android: com.SJSUMaterialsEngineering.VRLabA
   buildNumber:
     Standalone: 0
     iPhone: 0
