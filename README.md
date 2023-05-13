@@ -58,12 +58,12 @@ All project code is within the `Scripts` folder inside the `Assets` folder, writ
 - `CSVDataWriter.cs` : Export custom CSV data to the Meta Quest headset on final build, or within the editor in the CSV folder if testing.<br>
 - `/DirectionalArrow` : Contains `DirectionManager.cs`, which makes the arrow system follow the next collider on the array, and updates the text within the guiding arrow.<br>
 
-- `/MainMenu/` : Code used for the Main Menu
+- `/MainMenu/` : Code used for the Main Menu.
   - `PinpadButton.cs` : Attached to each button in the pinpad system. Uses triggers to detect button presses, and a coroutine to change color when pressed. Sends this information to StudentIDManager.
   - `StudentIDmanager.cs` : Singleton; Manages operations when pinpad buttons are pressed, such as updating the UI, clearing the numbers, or saving the student ID.
   - `TransitionManager.cs` : Singleton; Using the enum, developer may choose between type_A and type_B for the lab. This setting has to be changed in the inspector before building in order to execute the correct lab. Loads scenes as necessary using scene numbers.<br>
  
-- `/Poisson_A/` : Code used for poisson lab version A
+- `/Poisson_A/` : Code used for poisson lab version A.
   - `HandleLineRenderer.cs` : Using a LineRenderer, renders a line between a handle and an object, such as the samples inside the Poisson lab.
   - `PoissonCheckButton.cs` : Used to detect when the "Check" Button is pressed when solving the quiz.
   - `PoissonQuizManager.cs` : Used to manage the quiz system for the poisson's ratio questions, where a student increases/decreases the size of an outline to answer, what a specimen would look like after compression or extension. Uses a delta size approach to calculate correct answers, sets shapes to green if correct red otherwise.
@@ -71,10 +71,30 @@ All project code is within the `Scripts` folder inside the `Assets` folder, writ
   - `SolidShapeController.cs` : Calculates handle separation in order to drive simulations, such as extension and compression of samples given a poisson's ratio.
   - `SpecimenController.cs`  : Using a poisson's ratio value, calculates the X, Y and Z axis scale values to simulate deformation of the cylindrical or square sample. Updates pressure text (MPa).<br>
 
-- `/Tensile_A/` : Code used for Tensile lab version A
+- `/Tensile_A/` : Code used for Tensile lab version A.
+  - `/Graphs` : Code used for rendering the lab's graphs.
+    - `GraphManager.cs` : Renders graphs depending on the graph type that is in the tensile tester ( Polymer, Metal or Ceramic )
+    - `GraphWindowController.cs` : The most important script for graph rendering. Controls each window that is being rendered, with parameters such as font, subdivision count, point size, graphing speed etc. All graphing information is documented with Headers in the Unity editor.
+  - `ButtonStation.cs` : Same as poisson's check button, reloads tensile scene ( is redundant, now that I look at it ).
+  - `ConfirmButton.cs` : Button for confirming a selection when solving the quiz.
+  - `FracturedSpecimenConnector.cs` : Connects broken specimen by changing their 3D model to one which has the connections, and a black line to show the fracture point so that students can measure deformation after testing.
+  - `Option.cs` : Assigned to every option for the quiz to manage their text, material and color.
+  - `OptionManager.cs` : Has an array of Options ( Option.cs ), and manages the logic for any changes made to them, resets position, color etc. as necessary.
+  - `OptionReceiver.cs` : Uses socket interactors to manage the solution object being dragged and dropped to each solution field, such as YS, TS and FS,
+  - `OptionReceiverManager.cs` : Gets information from the socket interactors in "OptionReceiver.cs", sets soultions to red or green depending on solution, handles ID's to identify the correct solutions.
+  - `PullLever.cs` : Detects if lever in tensile tester is being pulled, starts the tensile testing process when a specimen is inserted and the lever is pulled.
+  - `Specimen.cs` : Has functions to manage specimen behavior such as BreakSpecimen, ConnectSpecimen, and resets specimen if they fall to the floor using OnCollisionEnter
+  - `TensileLabManager.cs` : Manages all major behaviors inside the tensile lab, such as which specimen is selected, what is the question number, what are the correct solutions etc.<br>
+
+- `/Tensile_B/` : Has `Videomanager.cs`, which manages the videos played in both verions of labs (Tensile B and Poission B).<br>
+
+- `/Whiteboard/` : Scripts for the whiteboard station and its drawing functions ( work in progress )
+  - `PenController.cs` : Cast a ray to the whiteboard, find collision position, send information to WhiteboardController.cs.
+  - `WhiteboardController.cs` : Handle parameters such as stroke width, color, and lerping amount. Draws into the whiteboard's render texture.
+  - `WhiteboardResetButton.cs` : TODO, clean the whiteboard.
 
 ## Acknowledgements
-CVRLabSJSU is brought to you by the VR/AR/CV Lab at San José State University.
+CVRLabSJSU is brought to you by the VR/AR/CV Lab at San José State University. Special thank you to Jon Oakes from KLEVR lab at the MLK library for help with hardware and student testing, Ismet Gurleroglu and the SPE club for their help testing early versions of the lab, and Dr. Vimal Viswanathan for advising, and student trials in the classroom.
 
 ## Credits:
 
