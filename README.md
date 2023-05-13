@@ -34,20 +34,21 @@ All project files are stored in the `Assets` folder within the `Unity` project, 
 - `Lighting` : Lighting and skybox information for the different scenes.<br>
 - `Materials` : All the materials used for texturing 3D assets in the lab.<br>
 - `Prefabs` :
-  - ===VR=== : All of the required components for the full VR rig. Can be dragged and dropped into any Unity scene.
-  - Arrow : Prefab for the arrow guidance system, can be dragged and dropped, then customized. Needs a list of colliders to point to, and when the colliders touch the player, the arrow will point to the next collider and text will update in an order-based fashion.
-  - Coordinates : A 3d object used to illustrate the X, Y and Z coordinates for demonstrations.
-  - Graph : Graph displayer. Can display data using array-based information, and be customized with aspects such as color, font, text sizing, labels etc.
-  - Handle : Red spherical handles utilized to interact with objects within poisson's lab. They display a dotted line which is connected to an object, and can be used for interactions.
-  - Next Lab Station : Button station that when pressed, loads the next lab.
-  - Reset Station : Button station that when pressed, resets the current lab. Useful in case a bug occurs, or the student wishes to reset.
-  - Whiteboard Station : Whiteboard station with its corresponding marker. Aspects like size, colors and thickness may be customized through the inspector and its corresponding scripts.
+  - **===VR===** : All of the required components for the full VR rig. Can be dragged and dropped into any Unity scene.
+  - **Arrow** : Prefab for the arrow guidance system, can be dragged and dropped, then customized. Needs a list of colliders to point to, and when the colliders touch the player, the arrow will point to the next collider and text will update in an order-based fashion.
+  - **Coordinates** : A 3d object used to illustrate the X, Y and Z coordinates for demonstrations.
+  - **Graph** : Graph displayer. Can display data using array-based information, and be customized with aspects such as color, font, text sizing, labels etc.
+  - **Handle** : Red spherical handles utilized to interact with objects within poisson's lab. They display a dotted line which is connected to an object, and can be used for interactions.
+  - **Next Lab Station** : Button station that when pressed, loads the next lab.
+  - **Reset Station** : Button station that when pressed, resets the current lab. Useful in case a bug occurs, or the student wishes to reset.
+  - **Whiteboard Station** : Whiteboard station with its corresponding marker. Aspects like size, colors and thickness may be customized through the inspector and its corresponding scripts.
 <br>
+
 - `Scenes` :
-  - Version_A folder : Version A of Poisson's and The Tensile Testing Lab, where the student interacts with objects within.
-  - Version_B folder : Version B of Poisson's and the Tensile Testing Lab, where the student watches a pre-recorded video of the interactions.
-  - MainMenu : The main menu, where the student inputs his information and the labs are loaded.
-<br>
+  - **Version_A folder** : Version A of Poisson's and The Tensile Testing Lab, where the student interacts with objects within.
+  - **Version_B folder** : Version B of Poisson's and the Tensile Testing Lab, where the student watches a pre-recorded video of the interactions.
+  - **MainMenu** : The main menu, where the student inputs his information and the labs are loaded.<br>
+
 - `Textures` : 2D textures used for Menu, Poission and Tensile lab as well as Render textures, which are used for the whiteboard, and versions B of the labs.
 - `UI` : Fonts used in the lab ( Creative Commons 0 License )
 - `Video` : Video demos used for the in-lab tensile testing tutorial, and lab version B tutorial.
