@@ -14,7 +14,7 @@ CVRLabSJSU allows students to simulate tensile testing of specimen materials, in
 ## How to run in a Meta Quest 2
 1. Download the apk's in this repository. If you wish to use the embodied version of the lab, use `VRlab_A`, otherwise use `VRlab_B`.
 2. Sideload the apk to your Meta Quest 2 using a Usb-C cable using a tool such as SideQuest https://sidequestvr.com
-3. Run the application. Keep in mind, the current builds will be continiously updated.
+3. Run the application. Keep in mind, the current builds will be continuously updated.
 
 ## How to edit and build using Unity Engine
 1. Clone the repository
