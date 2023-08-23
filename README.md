@@ -2,7 +2,7 @@
   
 # SJSU VR Lab
   
-Cognitive Effects of Embodied Learning with Virtual Reality Laboratory Environments for Engineering ( VRLEs)
+Embodied Learning with Virtual Reality Laboratory Environments for Engineering ( VRLs)
 
 ![VRlab 95f9c992f155785c9f94](https://user-images.githubusercontent.com/38381290/199352505-c72681df-b7b1-4a67-8700-f613e88a4b90.gif)
   
