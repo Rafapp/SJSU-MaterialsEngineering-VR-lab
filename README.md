@@ -98,7 +98,7 @@ CVRLabSJSU is brought to you by the VR/AR/CV Lab at San José State University. 
 
 ## Credits:
 
-### Technical Lead
+### Student Researcher
 Rafael Padilla Perez
 
 ### Project Advisor
