@@ -94,7 +94,7 @@ All project code is within the `Scripts` folder inside the `Assets` folder, writ
   - `WhiteboardResetButton.cs` : TODO, clean the whiteboard.
 
 ## Acknowledgements
-CVRLabSJSU is brought to you by the VR/AR/CV Lab at San José State University. Special thank you to Jon Oakes from KLEVR lab at the MLK library for help with hardware and student testing, Ismet Gurleroglu and the SPE club for their help testing early versions of the lab, and Dr. Vimal Viswanathan for advising, and student trials in the classroom.
+CVRLabSJSU is brought to you by the VR/AR/CV Lab at San José State University. Special thank you to Jon Oakes from KLEVR lab at the MLK library for help with hardware and student testing, Ismet Gurleroglu and the SPE club for their help testing early versions of the lab, and Dr. Vimal Viswanathan for advising.
 
 ## Credits:
 
