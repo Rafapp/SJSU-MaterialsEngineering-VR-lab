@@ -12,9 +12,10 @@ Embodied Learning with Virtual Reality Laboratory Environments for Engineering (
 CVRLabSJSU allows students to simulate tensile testing of specimen materials, interactive diagrams demonstrating Poisson's ratio, and provides a way to quiz them based on the lab experimentations. This laboratory is being used to research the effects of "embodied cognition" described in Markansky et. al, 2020, through an A/B split test.
 
 ## How to run in a Meta Quest 2
-1. Download the apk's in this repository. If you wish to use the embodied version of the lab, use `VRlab_A`, otherwise use `VRlab_B`.
-2. Sideload the apk to your Meta Quest 2 using a Usb-C cable using a tool such as SideQuest https://sidequestvr.com
-3. Run the application. Keep in mind, the current builds will be continuously updated.
+1. Download the two APK's in the following [Google Drive link](https://drive.google.com/drive/folders/1hRcEx6_CRU5ctdajFODCt0ZUtxSO3Ypg?usp=sharing).
+2. If you wish to use the embodied version of the lab, use `VRlab_A`, otherwise use `VRlab_B`.
+3. Sideload the apk to your Meta Quest 2 using a Usb-C cable using a tool such as [SideQuest](https://sidequestvr.com) and run the application. 
+4. Keep in mind, the current builds may be continuously updated. All previous versions will always remain available.
 
 ## How to edit and build using Unity Engine
 1. Clone the repository
