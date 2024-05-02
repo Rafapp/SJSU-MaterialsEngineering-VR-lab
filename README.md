@@ -19,7 +19,7 @@ CVRLabSJSU allows students to simulate tensile testing of specimen materials, in
 
 ## How to edit and build using Unity Engine
 1. Clone the repository
-2. Open the `VRlab` folder using Unity Desktop. The latest Unity version should work, although the project was developed with `Unity 2022.2.18f1 , macOS Silicon`.
+2. Open the `src/Unity/VRlab` folder using Unity Desktop. The latest Unity version should work, although the project was developed with `Unity 2022.2.18f1 , macOS Silicon`.
 3. Make any customizations as necessary
 4. Switch the build to Android, Build and Run with your Oculus Quest 2 headset connected. More information: https://developer.oculus.com/documentation/unity/unity-build/
 
