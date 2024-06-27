@@ -86,7 +86,7 @@ public class SpecimenController : MonoBehaviour
     }
 
     private void UpdateText() {
-        float roundedHandle = (float)Math.Round(GetHandleValue(), 3);
+        float roundedHandle = (float)Math.Round(GetHandleValue(), 3) * 1000.0f;
 
         if (GetHandleValue() > initialHandleDistance)
             pascalText.text = (-roundedHandle).ToString() + " MPa";
